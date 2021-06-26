@@ -10,7 +10,7 @@ namespace PT.Bike
 
         public void Steer(Vector3 diff, bool hasInput)
         {
-            transform.Rotate(0, diff.x * Time.deltaTime * _mdRotationSpeed, 0);
+            transform.Rotate(0, diff.x * Time.fixedDeltaTime * _mdRotationSpeed, 0);
 
             if (hasInput)
             {
@@ -60,7 +60,7 @@ namespace PT.Bike
 
         }
 
-        private void Update()
+        private void FixedUpdate()
         {
             AlignVelocity();
             RotateWheel();
@@ -89,7 +89,7 @@ namespace PT.Bike
                         _maxAngleDiff * qy * 3,
                         _steeringWheelT.localRotation.z
                     ),
-                    Time.deltaTime * _rotationSpeed
+                    Time.fixedDeltaTime * _rotationSpeed
             );
 
             _bikeBaseT.localRotation = Quaternion.Lerp(
@@ -99,7 +99,7 @@ namespace PT.Bike
                     _bikeBaseT.localRotation.y,
                     -_maxAngleDiff * qy * 3
                 ),
-                Time.deltaTime * _rotationSpeed
+                Time.fixedDeltaTime * _rotationSpeed
             );
         }
 

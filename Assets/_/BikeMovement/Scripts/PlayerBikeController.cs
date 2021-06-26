@@ -16,10 +16,9 @@ namespace PT.Bike
             _bikeController = GetComponent<BikeController>();
         }
 
-        private void Update()
+        private void FixedUpdate()
         {
             _bikeController.Steer(_inputManager.diff, _inputManager.hasInput);
-
             HandleTestInput();
         }
 
