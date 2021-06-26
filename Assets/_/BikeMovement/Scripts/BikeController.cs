@@ -75,31 +75,32 @@ namespace PT.Bike
         {
             Vector3 noYVel = _rb.velocity;
             noYVel.y = 0;
+            float qy = 0;
 
             if (noYVel.magnitude > 0.1f)
             {
-                Quaternion q = Quaternion.FromToRotation(noYVel, transform.forward);
+                qy = Quaternion.FromToRotation(noYVel, transform.forward).y;
+            }
 
-                _steeringWheelT.localRotation = Quaternion.Lerp(
+            _steeringWheelT.localRotation = Quaternion.Lerp(
                     _steeringWheelT.localRotation,
                     Quaternion.Euler(
                         _steeringWheelT.localRotation.x,
-                        _maxAngleDiff * q.y * 3,
+                        _maxAngleDiff * qy * 3,
                         _steeringWheelT.localRotation.z
                     ),
                     Time.deltaTime * _rotationSpeed
                 );
 
-                _bikeBaseT.localRotation = Quaternion.Lerp(
-                    _bikeBaseT.localRotation,
-                    Quaternion.Euler(
-                        _bikeBaseT.localRotation.x,
-                        _bikeBaseT.localRotation.y,
-                        -_maxAngleDiff * q.y * 3
-                    ),
-                    Time.deltaTime * _rotationSpeed
-                );
-            }
+            _bikeBaseT.localRotation = Quaternion.Lerp(
+                _bikeBaseT.localRotation,
+                Quaternion.Euler(
+                    _bikeBaseT.localRotation.x,
+                    _bikeBaseT.localRotation.y,
+                    -_maxAngleDiff * qy * 3
+                ),
+                Time.deltaTime * _rotationSpeed
+            );
         }
 
         #endregion
