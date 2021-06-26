@@ -24,7 +24,7 @@ namespace PT.Bike
 
         public void Accelerate()
         {
-            _rb.velocity += transform.forward * _acc;            
+            _rb.velocity += transform.forward * _acc;
 
             if(_rb.velocity.magnitude > _maxSpeed)
             {
@@ -52,7 +52,7 @@ namespace PT.Bike
 
         private void Start()
         {
-
+            Time.fixedDeltaTime *= 0.3f;
         }
 
         private void OnEnable()
