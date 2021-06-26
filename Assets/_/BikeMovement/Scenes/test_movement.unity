@@ -524,7 +524,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh102510
+  m_Name: pb_Mesh112432
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -682,11 +682,6 @@ Mesh:
     offset: 0
     size: 0
     path: 
---- !u!4 &2073277193 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4767750404437399278, guid: 7de6835cdbe091f48b0c0208aa9f9900, type: 3}
-  m_PrefabInstance: {fileID: 1844256247765133159}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1844256247765133159
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -694,52 +689,40 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 372485776, guid: 7de6835cdbe091f48b0c0208aa9f9900, type: 3}
+      propertyPath: m_Center.x
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 372485777, guid: 7de6835cdbe091f48b0c0208aa9f9900, type: 3}
+      propertyPath: m_Center.x
+      value: -0.4
+      objectReference: {fileID: 0}
     - target: {fileID: 4378742349649713808, guid: 7de6835cdbe091f48b0c0208aa9f9900, type: 3}
       propertyPath: m_Name
       value: Biker
       objectReference: {fileID: 0}
-    - target: {fileID: 6365132844723934976, guid: 7de6835cdbe091f48b0c0208aa9f9900, type: 3}
-      propertyPath: _bikeBaseT
-      value: 
-      objectReference: {fileID: 2073277193}
-    - target: {fileID: 6365132844723934976, guid: 7de6835cdbe091f48b0c0208aa9f9900, type: 3}
-      propertyPath: _diffEvaluator.m_Curve.Array.size
-      value: 2
+    - target: {fileID: 7008786149586203889, guid: 7de6835cdbe091f48b0c0208aa9f9900, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
       objectReference: {fileID: 0}
-    - target: {fileID: 6365132844723934976, guid: 7de6835cdbe091f48b0c0208aa9f9900, type: 3}
-      propertyPath: _diffEvaluator.m_Curve.Array.data[1].time
-      value: 1
+    - target: {fileID: 7008786149586203889, guid: 7de6835cdbe091f48b0c0208aa9f9900, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
       objectReference: {fileID: 0}
-    - target: {fileID: 6365132844723934976, guid: 7de6835cdbe091f48b0c0208aa9f9900, type: 3}
-      propertyPath: _diffEvaluator.m_Curve.Array.data[1].value
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6365132844723934976, guid: 7de6835cdbe091f48b0c0208aa9f9900, type: 3}
-      propertyPath: _diffEvaluator.m_Curve.Array.data[0].inSlope
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6365132844723934976, guid: 7de6835cdbe091f48b0c0208aa9f9900, type: 3}
-      propertyPath: _diffEvaluator.m_Curve.Array.data[1].inSlope
+    - target: {fileID: 7008786149586203889, guid: 7de6835cdbe091f48b0c0208aa9f9900, type: 3}
+      propertyPath: m_LocalRotation.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6365132844723934976, guid: 7de6835cdbe091f48b0c0208aa9f9900, type: 3}
-      propertyPath: _diffEvaluator.m_Curve.Array.data[0].outSlope
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6365132844723934976, guid: 7de6835cdbe091f48b0c0208aa9f9900, type: 3}
-      propertyPath: _diffEvaluator.m_Curve.Array.data[1].inWeight
+    - target: {fileID: 7008786149586203889, guid: 7de6835cdbe091f48b0c0208aa9f9900, type: 3}
+      propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6365132844723934976, guid: 7de6835cdbe091f48b0c0208aa9f9900, type: 3}
-      propertyPath: _diffEvaluator.m_Curve.Array.data[1].outSlope
-      value: 0
+    - target: {fileID: 7008786149586203889, guid: 7de6835cdbe091f48b0c0208aa9f9900, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
       objectReference: {fileID: 0}
-    - target: {fileID: 6365132844723934976, guid: 7de6835cdbe091f48b0c0208aa9f9900, type: 3}
-      propertyPath: _diffEvaluator.m_Curve.Array.data[0].tangentMode
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6365132844723934976, guid: 7de6835cdbe091f48b0c0208aa9f9900, type: 3}
-      propertyPath: _diffEvaluator.m_Curve.Array.data[1].tangentMode
+    - target: {fileID: 7008786149586203889, guid: 7de6835cdbe091f48b0c0208aa9f9900, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8718700555740139405, guid: 7de6835cdbe091f48b0c0208aa9f9900, type: 3}

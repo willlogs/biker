@@ -45,6 +45,8 @@ GameObject:
   - component: {fileID: 6343944414512834696}
   - component: {fileID: 6365132844723934976}
   - component: {fileID: 2615529206186151389}
+  - component: {fileID: 372485776}
+  - component: {fileID: 372485777}
   m_Layer: 0
   m_Name: Biker
   m_TagString: Untagged
@@ -81,7 +83,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 96
+  m_Constraints: 0
   m_CollisionDetection: 1
 --- !u!136 &2721590561466790688
 CapsuleCollider:
@@ -123,38 +125,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4de98465efb55ef4ea610d35ea6c2b5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _steeringWheelT: {fileID: 7008786149586203889}
+  _steeringWheelT: {fileID: 1382972296288485085}
   _bikeBaseT: {fileID: 4767750404437399278}
-  _maxSpeed: 20
+  _maxSpeed: 40
   _maxAngleDiff: 35
-  _rotationSpeed: 10
-  _mdRotationSpeed: 50
+  _rotationSpeed: 3
+  _mdRotationSpeed: 3000
+  _acc: 1
   _rb: {fileID: 2911586316592682963}
   _animator: {fileID: 7008786149579004675}
-  _diffEvaluator:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 2
-      outSlope: 2
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
 --- !u!114 &2615529206186151389
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -167,6 +146,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3c4e2f06719f664bb9214615ee28a6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!136 &372485776
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4378742349649713808}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.20079748
+  m_Height: 1.9537907
+  m_Direction: 2
+  m_Center: {x: 0.17, y: 0.23, z: -0.028499365}
+--- !u!136 &372485777
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4378742349649713808}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.20079748
+  m_Height: 1.9537907
+  m_Direction: 2
+  m_Center: {x: -0.17, y: 0.23, z: -0.028499365}
 --- !u!1001 &2955681056460947799
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -243,8 +250,8 @@ Animator:
   m_CorrespondingSourceObject: {fileID: 5206308077520902740, guid: b4ed6861619b62e4abe0070b38a00057, type: 3}
   m_PrefabInstance: {fileID: 2955681056460947799}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &7008786149586203889 stripped
+--- !u!4 &1382972296288485085 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 5206308077513979302, guid: b4ed6861619b62e4abe0070b38a00057, type: 3}
+  m_CorrespondingSourceObject: {fileID: 4194537608267693962, guid: b4ed6861619b62e4abe0070b38a00057, type: 3}
   m_PrefabInstance: {fileID: 2955681056460947799}
   m_PrefabAsset: {fileID: 0}

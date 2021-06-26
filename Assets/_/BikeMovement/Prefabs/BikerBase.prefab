@@ -511,14 +511,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5206308077513484678}
   m_LocalRotation: {x: -0.686082, y: -0, z: -0, w: 0.7275242}
-  m_LocalPosition: {x: 0, y: 1.1080616, z: 0.28136858}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5206308077513979300}
   - {fileID: 3502864875845337123}
   - {fileID: 3502864877156491137}
-  m_Father: {fileID: 5206308077513979316}
-  m_RootOrder: 1
+  m_Father: {fileID: 4194537608267693962}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -86.642, y: 0, z: 0}
 --- !u!33 &5206308077510587794
 MeshFilter:
@@ -785,7 +785,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3502864876075984780}
-  - {fileID: 5206308077513979302}
+  - {fileID: 4194537608267693962}
   - {fileID: 5206308077513979296}
   - {fileID: 5206308077513979274}
   - {fileID: 5206308077513979378}
@@ -1336,9 +1336,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _steeringWheelT: {fileID: 5206308077513979302}
+  _bikeBaseT: {fileID: 0}
   _maxSpeed: 20
-  _maxRotation: 35
+  _maxAngleDiff: 35
+  _rotationSpeed: 0
+  _mdRotationSpeed: 20
+  _acc: 0
   _rb: {fileID: 382740868}
+  _animator: {fileID: 0}
 --- !u!54 &382740868
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2726,6 +2731,37 @@ Transform:
   m_Father: {fileID: 5206308077513979382}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -1.6903118, y: -4.5387516, z: 69.31927}
+--- !u!1 &7976727648708390581
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4194537608267693962}
+  m_Layer: 0
+  m_Name: Wheel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4194537608267693962
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7976727648708390581}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.1080618, z: 0.28136858}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 5206308077513979302}
+  m_Father: {fileID: 5206308077513979316}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1501163990332671774
 PrefabInstance:
   m_ObjectHideFlags: 0
