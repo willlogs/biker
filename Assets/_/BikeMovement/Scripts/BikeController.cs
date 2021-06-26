@@ -90,7 +90,7 @@ namespace PT.Bike
                         _steeringWheelT.localRotation.z
                     ),
                     Time.deltaTime * _rotationSpeed
-                );
+            );
 
             _bikeBaseT.localRotation = Quaternion.Lerp(
                 _bikeBaseT.localRotation,
