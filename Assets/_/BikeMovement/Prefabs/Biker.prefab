@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4095747617219342086
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4767750404437399278}
+  m_Layer: 0
+  m_Name: Base
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4767750404437399278
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4095747617219342086}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 7008786149586203875}
+  m_Father: {fileID: 8718700555740139405}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4378742349649713808
 GameObject:
   m_ObjectHideFlags: 0
@@ -32,7 +63,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 7008786149586203875}
+  - {fileID: 4767750404437399278}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -45,13 +76,13 @@ Rigidbody:
   m_GameObject: {fileID: 4378742349649713808}
   serializedVersion: 2
   m_Mass: 100
-  m_Drag: 1
+  m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 96
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!136 &2721590561466790688
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -93,12 +124,37 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _steeringWheelT: {fileID: 7008786149586203889}
+  _bikeBaseT: {fileID: 4767750404437399278}
   _maxSpeed: 20
-  _maxRotation: 45
+  _maxAngleDiff: 35
   _rotationSpeed: 10
   _mdRotationSpeed: 50
   _rb: {fileID: 2911586316592682963}
   _animator: {fileID: 7008786149579004675}
+  _diffEvaluator:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!114 &2615529206186151389
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -116,7 +172,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 8718700555740139405}
+    m_TransformParent: {fileID: 4767750404437399278}
     m_Modifications:
     - target: {fileID: 382740869, guid: b4ed6861619b62e4abe0070b38a00057, type: 3}
       propertyPath: m_Enabled
@@ -124,7 +180,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5206308077513484692, guid: b4ed6861619b62e4abe0070b38a00057, type: 3}
       propertyPath: m_Name
-      value: BikerBase
+      value: Model
       objectReference: {fileID: 0}
     - target: {fileID: 5206308077513979316, guid: b4ed6861619b62e4abe0070b38a00057, type: 3}
       propertyPath: m_RootOrder

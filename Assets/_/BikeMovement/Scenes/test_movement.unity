@@ -524,7 +524,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-30482
+  m_Name: pb_Mesh102510
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -682,6 +682,11 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!4 &2073277193 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4767750404437399278, guid: 7de6835cdbe091f48b0c0208aa9f9900, type: 3}
+  m_PrefabInstance: {fileID: 1844256247765133159}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1844256247765133159
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -693,6 +698,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Biker
       objectReference: {fileID: 0}
+    - target: {fileID: 6365132844723934976, guid: 7de6835cdbe091f48b0c0208aa9f9900, type: 3}
+      propertyPath: _bikeBaseT
+      value: 
+      objectReference: {fileID: 2073277193}
     - target: {fileID: 6365132844723934976, guid: 7de6835cdbe091f48b0c0208aa9f9900, type: 3}
       propertyPath: _diffEvaluator.m_Curve.Array.size
       value: 2
@@ -706,16 +715,32 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6365132844723934976, guid: 7de6835cdbe091f48b0c0208aa9f9900, type: 3}
+      propertyPath: _diffEvaluator.m_Curve.Array.data[0].inSlope
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6365132844723934976, guid: 7de6835cdbe091f48b0c0208aa9f9900, type: 3}
       propertyPath: _diffEvaluator.m_Curve.Array.data[1].inSlope
-      value: 3.1026456
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6365132844723934976, guid: 7de6835cdbe091f48b0c0208aa9f9900, type: 3}
+      propertyPath: _diffEvaluator.m_Curve.Array.data[0].outSlope
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6365132844723934976, guid: 7de6835cdbe091f48b0c0208aa9f9900, type: 3}
       propertyPath: _diffEvaluator.m_Curve.Array.data[1].inWeight
-      value: 0.032357454
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6365132844723934976, guid: 7de6835cdbe091f48b0c0208aa9f9900, type: 3}
       propertyPath: _diffEvaluator.m_Curve.Array.data[1].outSlope
-      value: 3.1026456
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6365132844723934976, guid: 7de6835cdbe091f48b0c0208aa9f9900, type: 3}
+      propertyPath: _diffEvaluator.m_Curve.Array.data[0].tangentMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6365132844723934976, guid: 7de6835cdbe091f48b0c0208aa9f9900, type: 3}
+      propertyPath: _diffEvaluator.m_Curve.Array.data[1].tangentMode
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8718700555740139405, guid: 7de6835cdbe091f48b0c0208aa9f9900, type: 3}
       propertyPath: m_RootOrder

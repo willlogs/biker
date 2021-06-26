@@ -10,9 +10,10 @@ namespace PT.Bike
 
         public void Steer(Vector3 diff, bool hasInput)
         {
-            float currDegree = Mathf.Atan2(_moveDirection.x, _moveDirection.z) * Mathf.Rad2Deg;
+            //float currDegree = Mathf.Atan2(_moveDirection.x, _moveDirection.z) * Mathf.Rad2Deg;
+            float currDegree = Vector3.SignedAngle(_moveDirection, transform.forward, Vector3.up);
 
-            if ((diff.x > 0 && _maxRotation > currDegree) || (diff.x < 0 && -_maxRotation < currDegree))
+            if ((diff.x > 0 && _maxAngleDiff > currDegree) || (diff.x < 0 && -_maxAngleDiff < currDegree))
             {
                 _moveDirection = Quaternion.Euler(0, _mdRotationSpeed * diff.x, 0) * _moveDirection;
             }
@@ -46,8 +47,8 @@ namespace PT.Bike
 
         #region privates
 
-        [SerializeField] private Transform _steeringWheelT;
-        [SerializeField] private float _maxSpeed, _maxRotation = 35, _rotationSpeed, _mdRotationSpeed = 20;
+        [SerializeField] private Transform _steeringWheelT, _bikeBaseT;
+        [SerializeField] private float _maxSpeed, _maxAngleDiff = 35, _rotationSpeed, _mdRotationSpeed = 20;
         [SerializeField] private Rigidbody _rb;
         [SerializeField] private Animator _animator;
         [SerializeField] private AnimationCurve _diffEvaluator;
@@ -62,7 +63,7 @@ namespace PT.Bike
 
         private void OnEnable()
         {
-            _moveDirection = transform.forward;
+            _moveDirection = Vector3.forward;
         }
 
         private void Update()
@@ -72,19 +73,25 @@ namespace PT.Bike
 
         private void RotateInDirection()
         {
-            float degree = Quaternion.FromToRotation(transform.forward, _moveDirection).eulerAngles.y;
+            float degree = Vector3.SignedAngle(_moveDirection, transform.forward, Vector3.up);
+            float diffMagnitude = (transform.forward - _moveDirection).magnitude;
 
             _steeringWheelT.localRotation = Quaternion.Lerp(_steeringWheelT.localRotation, Quaternion.Euler(
                 _steeringWheelT.localRotation.eulerAngles.x,
-                degree,
+                -degree,
                 _steeringWheelT.localRotation.eulerAngles.z
             ), Time.deltaTime * _rotationSpeed);
 
-            transform.localRotation = Quaternion.Lerp(transform.localRotation, Quaternion.Euler(
-                transform.localRotation.x,
-                degree,
-                -degree
-            ), Time.deltaTime * _rotationSpeed * 0.2f);
+
+            if (diffMagnitude > 0.1f)
+            {
+                transform.forward = Vector3.Lerp(transform.forward, _moveDirection, Time.deltaTime * _rotationSpeed);
+                /*transform.localRotation = Quaternion.Lerp(transform.localRotation, Quaternion.Euler(
+                    transform.localRotation.x,
+                    transform.localRotation.y - degree,
+                    transform.localRotation.z
+                ), Time.deltaTime * _rotationSpeed * 0.5f);*/
+            }
         }
 
         #endregion
