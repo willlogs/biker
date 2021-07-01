@@ -29,10 +29,12 @@ namespace PT.Bike
         #endregion
 
         #region privates
-        [SerializeField] private bool _isInShootingMode = false;
+        [SerializeField] private bool _isInShootingMode = false, _testMode = false;
 
         [SerializeField] private FullBodyBipedIK _ik;
         [SerializeField] private Gun _gun;
+
+        [SerializeField] private float _switchEach = 10f;
 
         private TouchInputManager _inputManager;
         private BikeController _bikeController;
@@ -48,6 +50,9 @@ namespace PT.Bike
                 ActivateShootingMode();
             else
                 DeactivateShootingMode();
+
+            if(_testMode)
+                StartCoroutine(SwitchModes());
         }
 
         private void Update()
@@ -59,6 +64,27 @@ namespace PT.Bike
             else
             {
                 _bikeController.Steer(_inputManager.diff, _inputManager.hasInput);                
+            }
+        }
+
+        private void ToggleMode()
+        {
+            if (_isInShootingMode)
+            {
+                DeactivateShootingMode();
+            }
+            else
+            {
+                ActivateShootingMode();
+            }
+        }
+
+        private IEnumerator SwitchModes()
+        {
+            while (true)
+            {
+                yield return new WaitForSeconds(_switchEach);
+                ToggleMode();
             }
         }
         #endregion privates

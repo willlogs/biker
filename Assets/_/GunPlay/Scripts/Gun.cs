@@ -15,7 +15,11 @@ namespace PT.GunPlay
             {
                 GameObject go = Instantiate(_bulletPrefab);
                 go.transform.position = _shootingPointT.position;
-                go.GetComponent<Bullet>().GetShot(_gunTargetT.position - _shootingPointT.position);
+
+                go.GetComponent<Bullet>().GetShot(
+                    _gunTargetT.position - _shootingPointT.position,
+                    _parentRB.velocity
+                );
                 OnShoot?.Invoke();
 
                 CoolDown();
@@ -28,6 +32,7 @@ namespace PT.GunPlay
 
         [SerializeField] private int _chunkSize = 1;
         [SerializeField] private float _spread = 0f;
+        [SerializeField] private Rigidbody _parentRB;
 
         private bool _isCoolingDown = false;
         private float _coolDownTimer;
