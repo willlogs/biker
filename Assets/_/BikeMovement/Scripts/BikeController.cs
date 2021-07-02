@@ -1,3 +1,4 @@
+using Dreamteck.Splines;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,18 +8,22 @@ namespace PT.Bike
     public class BikeController : MonoBehaviour
     {
         #region publics
+        public SplineFollower splineFollower;
 
         public void Steer(Vector3 diff, bool hasInput)
         {
-            transform.Rotate(0, diff.x * Time.deltaTime * _mdRotationSpeed, 0);
+            if (_canControl)
+            {
+                transform.Rotate(0, diff.x * Time.deltaTime * _mdRotationSpeed, 0);
 
-            if (hasInput)
-            {
-                Accelerate();
-            }
-            else
-            {
-                //DeAccelerate();
+                if (hasInput)
+                {
+                    Accelerate();
+                }
+                else
+                {
+                    //DeAccelerate();
+                }
             }
         }
 
@@ -38,21 +43,32 @@ namespace PT.Bike
             _rb.velocity = new Vector3(diffuser * _rb.velocity.x, _rb.velocity.y, diffuser * _rb.velocity.z);
         }
 
+        public void DeactivateControl()
+        {
+            _canControl = false;
+        }
+
+        public void ActivateControl()
+        {
+            _canControl = true;
+        }
+
         #endregion
 
 
         #region privates
 
-        [SerializeField] private Transform _steeringWheelT, _bikeBaseT;
+        [SerializeField] private Transform _steeringWheelT, _bikeBaseT, _centerOfMass;
         [SerializeField] private float _maxSpeed, _maxAngleDiff = 35, _rotationSpeed, _mdRotationSpeed = 20, _acc;
         [SerializeField] private Rigidbody _rb;
         [SerializeField] private Animator _animator;
 
         private float _curSpeed;
+        private bool _canControl = true;
 
         private void Start()
         {
-
+            _rb.centerOfMass = _centerOfMass.localPosition;
         }
 
         private void OnEnable()
@@ -62,7 +78,11 @@ namespace PT.Bike
 
         private void Update()
         {
-            AlignVelocity();
+            if (_canControl)
+            {
+                AlignVelocity();
+            }
+
             RotateWheel();
         }
 
