@@ -17,8 +17,7 @@ namespace PT.GunPlay
                 go.transform.position = _shootingPointT.position;
 
                 go.GetComponent<Bullet>().GetShot(
-                    _gunTargetT.position - _shootingPointT.position,
-                    _parentRB.velocity
+                    _gunTargetT.position - _shootingPointT.position
                 );
                 OnShoot?.Invoke();
 

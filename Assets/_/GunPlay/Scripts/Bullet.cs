@@ -8,10 +8,10 @@ namespace PT.GunPlay
     public class Bullet : PhysicalObject
     {
         #region publics
-        public void GetShot(Vector3 direction, Vector3 additionalSpeed)
+        public void GetShot(Vector3 direction)
         {
             transform.forward = direction.normalized;
-            _rb.velocity = direction.normalized * _speed + additionalSpeed;
+            _rb.velocity = direction.normalized * _speed;
         }
         #endregion
 
@@ -26,7 +26,7 @@ namespace PT.GunPlay
         {
             if (_isTesting)
             {
-                GetShot(transform.forward, Vector3.zero);
+                GetShot(transform.forward);
             }
         }
         #endregion

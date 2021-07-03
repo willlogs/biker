@@ -11,6 +11,7 @@ namespace PT.Bike
             BikeController bc = other.GetComponent<BikeController>();
             if (bc != null)
             {
+                bc.DontFollowSpline();
                 bc.splineFollower.enabled = false;
                 bc.ActivateControl();
 
@@ -20,7 +21,7 @@ namespace PT.Bike
                     pbc.DeactivateShootingMode();
 
                     Time.timeScale = 1f;
-                    Time.fixedDeltaTime = 0.02f;
+                    Time.fixedDeltaTime = 0.01f;
                 }
             }
         }

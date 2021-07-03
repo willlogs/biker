@@ -14,7 +14,10 @@ namespace PT.Bike
         {
             if (_canControl)
             {
-                transform.Rotate(0, diff.x * Time.deltaTime * _mdRotationSpeed, 0);
+                //transform.Rotate(0, diff.x * Time.deltaTime * _mdRotationSpeed, 0);
+                Quaternion before = transform.rotation;
+                before = new Quaternion(0, diff.x, 0, 1) * before;
+                transform.rotation = Quaternion.Lerp(transform.rotation, before, Time.deltaTime * _mdRotationSpeed);
 
                 if (hasInput)
                 {
@@ -53,18 +56,34 @@ namespace PT.Bike
             _canControl = true;
         }
 
+        public void FollowSpline()
+        {
+            _followingSpline = true;
+            _rb.isKinematic = true;
+            _splineFollowerT.parent = null;
+        }
+
+        public void DontFollowSpline()
+        {
+            _followingSpline = false;
+            _rb.isKinematic = false;
+            _splineFollowerT.position = transform.position;
+            _splineFollowerT.parent = transform;
+            _rb.velocity = transform.forward * 10f;
+        }
+
         #endregion
 
 
         #region privates
 
-        [SerializeField] private Transform _steeringWheelT, _bikeBaseT, _centerOfMass;
+        [SerializeField] private Transform _steeringWheelT, _bikeBaseT, _centerOfMass, _splineFollowerT;
         [SerializeField] private float _maxSpeed, _maxAngleDiff = 35, _rotationSpeed, _mdRotationSpeed = 20, _acc;
-        [SerializeField] private Rigidbody _rb;
+        [SerializeField] private Rigidbody _rb, _followerRB;
         [SerializeField] private Animator _animator;
 
         private float _curSpeed;
-        private bool _canControl = true;
+        private bool _canControl = true, _followingSpline;
 
         private void Start()
         {
@@ -84,6 +103,13 @@ namespace PT.Bike
             }
 
             RotateWheel();
+
+            if (_followingSpline)
+            {
+                transform.position = Vector3.Lerp(transform.position, _splineFollowerT.position, Time.deltaTime * 10);
+                transform.rotation = Quaternion.Lerp(transform.rotation, _splineFollowerT.rotation, Time.deltaTime * 10);
+                _rb.velocity = _followerRB.velocity;
+            }
         }
 
         private void AlignVelocity()
