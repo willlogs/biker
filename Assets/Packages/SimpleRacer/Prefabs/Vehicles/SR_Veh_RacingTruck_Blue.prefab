@@ -254,6 +254,7 @@ GameObject:
   - component: {fileID: 481908}
   - component: {fileID: 3362008}
   - component: {fileID: 2328140}
+  - component: {fileID: 5551837075716707629}
   m_Layer: 0
   m_Name: SR_Veh_RacingTruck_Blue
   m_TagString: Untagged
@@ -328,6 +329,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &5551837075716707629
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 171764}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300000, guid: 4a26200bcd5e73c4ba1b8aef3eab2b31, type: 3}
 --- !u!1 &183768
 GameObject:
   m_ObjectHideFlags: 0

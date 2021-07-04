@@ -1,33 +1,48 @@
 using DG.Tweening;
 using Dreamteck.Splines;
+using PT.Utils;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditorInternal;
 using UnityEngine;
 
 namespace PT.Rooftop
 {
     public class HeliController : MonoBehaviour
     {
-        public void StartFollowing()
+        public void StartFollowing(Transform target)
         {
-            _isFollowing = true;
-            _thirdStage = false;
-            _percentage = 0;
-            BeforeDelay();
+            if (!_isFollowing)
+            {
+                _isFollowing = true;
+                _thirdStage = false;
+                _percentage = 0;
+                _targetT = target;
+                BeforeDelay();
+            }
         }
 
         public void StopFollowing()
         {
-            _isFollowing = false;
-            _percentage = 0;
+            if (_isFollowing)
+            {
+                _isFollowing = false;
+                _percentage = 0;
+            }
         }
 
         [SerializeField] private SplinePositioner _splinePositioner;
         [SerializeField] private float _reachTime, _delayTime, _tillStopTime, _followSpeed = 10f, _zOffset = 5;
         [SerializeField] private Transform _targetT;
+        [SerializeField] private GameObject _smokePrefab, _explosionPrefab;
+        [SerializeField] private Material _destroyedMat;
+        [SerializeField] private Renderer _renderer;
+        [SerializeField] private bool _isLast = false;
 
-        private bool _isFollowing = false, _thirdStage = false;
+        private bool _isFollowing = false, _thirdStage = false, _isDead = false;
         private float _percentage = 0;
+
+        private Tweener _tweener;
 
         private void Update()
         {
@@ -45,14 +60,14 @@ namespace PT.Rooftop
 
         private void BeforeDelay()
         {
-            DOTween.To(() => _percentage, (x) => { _percentage = x; }, 0.4f, _reachTime).OnComplete(() => {
+            _tweener = DOTween.To(() => _percentage, (x) => { _percentage = x; }, 0.4f, _reachTime).OnComplete(() => {
                 Delay();
             });
         }
 
         private void Delay()
         {
-            DOTween.To(() => _percentage, (x) => { _percentage = x; }, 0.6f, _delayTime).OnComplete(() => {
+            _tweener = DOTween.To(() => _percentage, (x) => { _percentage = x; }, 0.6f, _delayTime).OnComplete(() => {
                 AfterDelay();
             });
         }
@@ -60,7 +75,38 @@ namespace PT.Rooftop
         private void AfterDelay()
         {
             _thirdStage = true;
-            DOTween.To(() => _percentage, (x) => { _percentage = x; }, 1f, _tillStopTime);
+            _tweener = DOTween.To(() => _percentage, (x) => { _percentage = x; }, 1f, _tillStopTime).OnComplete(() =>
+            {
+                Destroy(gameObject);
+            });
+        }
+
+        private void OnCollisionEnter(Collision collision)
+        {
+            if(collision.gameObject.layer == 9 && !_isDead)
+            {
+                if (_isLast)
+                {
+                    BlowUp();
+                }
+                else
+                {
+                    GameObject go = Instantiate(_smokePrefab);
+                    go.transform.position = collision.GetContact(0).point;
+                    go.transform.parent = transform;
+                }
+            }
+        }
+
+        private void BlowUp()
+        {
+            _isDead = true;
+            TimeManager.Instance.GoNormal(0.5f);
+            _isFollowing = false;
+            GameObject go = Instantiate(_explosionPrefab);
+            go.transform.position = transform.position;
+            _renderer.material = _destroyedMat;
+            gameObject.AddComponent<Rigidbody>();
         }
     }
 }

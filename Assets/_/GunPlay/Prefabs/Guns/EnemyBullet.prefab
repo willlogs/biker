@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1586968356815344}
   - component: {fileID: 11205402493382424}
   - component: {fileID: 42546210339437968}
-  m_Layer: 9
+  m_Layer: 7
   m_Name: SM_Item_Bullet_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -109,8 +109,8 @@ GameObject:
   - component: {fileID: 4666148396443358900}
   - component: {fileID: 3742669730533735130}
   - component: {fileID: 8613582549083535077}
-  m_Layer: 9
-  m_Name: Bullet
+  m_Layer: 7
+  m_Name: EnemyBullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -159,7 +159,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51a0a4506163afa4fafe170852f616a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 60
+  _speed: 20
   _isTesting: 0
   _impactPrefab: {fileID: 1819934142859358139, guid: 45fbaa50d94ee8747af5bcf33f968ebd, type: 3}
 --- !u!96 &3742669730533735130

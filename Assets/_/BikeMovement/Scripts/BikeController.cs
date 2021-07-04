@@ -1,3 +1,4 @@
+using DG.Tweening;
 using Dreamteck.Splines;
 using System.Collections;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ namespace PT.Bike
     public class BikeController : MonoBehaviour
     {
         #region publics
-        public SplineFollower splineFollower;
+        public SplinePositioner splineFollower;
 
         public void Steer(Vector3 diff, bool hasInput)
         {
@@ -61,15 +62,31 @@ namespace PT.Bike
             _followingSpline = true;
             _rb.isKinematic = true;
             _splineFollowerT.parent = null;
+            _position = 0;
+
+            _positionTween = DOTween.To(() => _position, (x) =>{ _position = x;  }, 1f, _splineDuration).SetEase(Ease.Linear);
         }
 
         public void DontFollowSpline()
         {
             _followingSpline = false;
             _rb.isKinematic = false;
+
+            try
+            {
+                Destroy(splineFollower.spline.gameObject);
+                Destroy(splineFollower);
+            }
+            catch { }
+
+            splineFollower = _splineFollowerT.gameObject.AddComponent<SplinePositioner>();
+
             _splineFollowerT.position = transform.position;
             _splineFollowerT.parent = transform;
+
             _rb.velocity = transform.forward * 10f;
+            _position = 0;
+            _positionTween.Kill();
         }
 
         #endregion
@@ -78,12 +95,13 @@ namespace PT.Bike
         #region privates
 
         [SerializeField] private Transform _steeringWheelT, _bikeBaseT, _centerOfMass, _splineFollowerT;
-        [SerializeField] private float _maxSpeed, _maxAngleDiff = 35, _rotationSpeed, _mdRotationSpeed = 20, _acc;
+        [SerializeField] private float _maxSpeed, _maxAngleDiff = 35, _rotationSpeed, _mdRotationSpeed = 20, _acc, _splineDuration = 5;
         [SerializeField] private Rigidbody _rb, _followerRB;
         [SerializeField] private Animator _animator;
 
-        private float _curSpeed;
+        private float _curSpeed, _position = 0;
         private bool _canControl = true, _followingSpline;
+        private Tweener _positionTween;
 
         private void Start()
         {
@@ -106,6 +124,7 @@ namespace PT.Bike
 
             if (_followingSpline)
             {
+                splineFollower.SetPercent(_position);
                 transform.position = Vector3.Lerp(transform.position, _splineFollowerT.position, Time.deltaTime * 10);
                 transform.rotation = Quaternion.Lerp(transform.rotation, _splineFollowerT.rotation, Time.deltaTime * 10);
                 _rb.velocity = _followerRB.velocity;
@@ -148,6 +167,18 @@ namespace PT.Bike
                 Time.deltaTime * _rotationSpeed
             );
         }
+
+        /*private void OnCollisionEnter(Collision collision)
+        {
+            if(collision.gameObject.layer == 6)
+            {
+                try
+                {
+                    collision.gameObject.GetComponent<Rigidbody>().velocity = Vector3.forward * 7f;
+                }
+                catch { }
+            }
+        }*/
 
         #endregion
 

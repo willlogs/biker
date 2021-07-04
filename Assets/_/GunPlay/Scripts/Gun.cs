@@ -9,16 +9,41 @@ namespace PT.GunPlay
     {
         public UnityEvent OnShoot;
 
-        public void Shoot()
+        public void Shoot(bool withTarget = true)
         {
             if (!_isCoolingDown)
             {
                 GameObject go = Instantiate(_bulletPrefab);
                 go.transform.position = _shootingPointT.position;
 
-                go.GetComponent<Bullet>().GetShot(
-                    _gunTargetT.position - _shootingPointT.position
-                );
+                if (withTarget)
+                {
+                    RaycastHit hitInfo;
+                    Physics.Raycast(_shootingPointT.position, _gunTargetT.position - _shootingPointT.position, out hitInfo, 50, layerMask, QueryTriggerInteraction.Ignore);
+                    if (hitInfo.collider != null)
+                    {
+                        GameObject goalGO = new GameObject();
+                        goalGO.transform.position = hitInfo.point;
+                        goalGO.transform.parent = hitInfo.collider.transform;
+
+                        go.GetComponent<Bullet>().GetShot(
+                            _gunTargetT.position - _shootingPointT.position,
+                            goalGO.transform
+                        );
+                    }
+                    else
+                    {
+                        go.GetComponent<Bullet>().GetShot(
+                            _gunTargetT.position - _shootingPointT.position
+                        );
+                    }
+                }
+                else
+                {
+                    go.GetComponent<Bullet>().GetShot(
+                        _gunTargetT.position - _shootingPointT.position
+                    );
+                }
                 OnShoot?.Invoke();
 
                 CoolDown();
@@ -33,7 +58,9 @@ namespace PT.GunPlay
         [SerializeField] private float _spread = 0f;
         [SerializeField] private Rigidbody _parentRB;
 
-        private bool _isCoolingDown = false;
+        [SerializeField] private LayerMask layerMask;
+
+        private bool _isCoolingDown = true;
         private float _coolDownTimer;
 
         private void CoolDown()

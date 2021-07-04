@@ -1,3 +1,4 @@
+using PT.Utils;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,6 +13,7 @@ namespace PT.Bike
             if (bc != null)
             {
                 bc.DontFollowSpline();
+                bc.splineFollower.spline = null;
                 bc.splineFollower.enabled = false;
                 bc.ActivateControl();
 
@@ -19,9 +21,7 @@ namespace PT.Bike
                 if (pbc != null)
                 {
                     pbc.DeactivateShootingMode();
-
-                    Time.timeScale = 1f;
-                    Time.fixedDeltaTime = 0.01f;
+                    TimeManager.Instance.GoNormal(0.5f);
                 }
             }
         }

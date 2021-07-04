@@ -92,6 +92,7 @@ GameObject:
   - component: {fileID: 448776}
   - component: {fileID: 3383914}
   - component: {fileID: 2349206}
+  - component: {fileID: 4306400348911751630}
   m_Layer: 0
   m_Name: SR_Veh_StockCar_Orange
   m_TagString: Untagged
@@ -166,6 +167,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &4306400348911751630
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 171932}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300000, guid: 577810e0a619333408e61db1f7e881fa, type: 3}
 --- !u!1 &176502
 GameObject:
   m_ObjectHideFlags: 0
