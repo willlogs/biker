@@ -60,6 +60,7 @@ namespace PT.Bike
             if (_isInShootingMode)
             {
                 _gunController.ApplyMovement(_inputManager.diff, _inputManager.hasInput);
+                _bikeController.Steer(Vector3.zero, true);
             }
             else
             {

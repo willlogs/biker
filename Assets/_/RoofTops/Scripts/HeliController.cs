@@ -42,6 +42,8 @@ namespace PT.Rooftop
         private bool _isFollowing = false, _thirdStage = false, _isDead = false;
         private float _percentage = 0;
 
+        private int _takenBulletsCount = 0;
+
         private Tweener _tweener;
 
         private void Update()
@@ -91,9 +93,15 @@ namespace PT.Rooftop
                 }
                 else
                 {
+                    _takenBulletsCount++;
                     GameObject go = Instantiate(_smokePrefab);
                     go.transform.position = collision.GetContact(0).point;
                     go.transform.parent = transform;
+
+                    if(_takenBulletsCount > 5)
+                    {
+                        BlowUp();
+                    }
                 }
             }
         }

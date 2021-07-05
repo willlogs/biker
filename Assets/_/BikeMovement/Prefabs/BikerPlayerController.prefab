@@ -734,7 +734,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _isInGunPlayMode: 0
   _gunAimingTarget: {fileID: 4305645067155986248}
-  _targetMovementSpeed: 1000
+  _targetMovementSpeed: 3000
   _gun: {fileID: 1753399360097541198}
 --- !u!65 &4243741049013710159
 BoxCollider:
@@ -3482,6 +3482,10 @@ PrefabInstance:
       propertyPath: _gunTargetT
       value: 
       objectReference: {fileID: 4305645067155986248}
+    - target: {fileID: 5207946732169116338, guid: d15165dd1884aba44b21f14ac1f6a796, type: 3}
+      propertyPath: _coolDownTime
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 6018154271703253840, guid: d15165dd1884aba44b21f14ac1f6a796, type: 3}
       propertyPath: m_RootOrder
       value: 0

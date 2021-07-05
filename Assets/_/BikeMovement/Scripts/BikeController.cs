@@ -13,7 +13,7 @@ namespace PT.Bike
 
         public void Steer(Vector3 diff, bool hasInput)
         {
-            if (_canControl)
+            if (_canControl && _groundTouches > 0)
             {
                 //transform.Rotate(0, diff.x * Time.deltaTime * _mdRotationSpeed, 0);
                 Quaternion before = transform.rotation;
@@ -23,10 +23,6 @@ namespace PT.Bike
                 if (hasInput)
                 {
                     Accelerate();
-                }
-                else
-                {
-                    //DeAccelerate();
                 }
             }
         }
@@ -168,18 +164,23 @@ namespace PT.Bike
             );
         }
 
-        /*private void OnCollisionEnter(Collision collision)
-        {
-            if(collision.gameObject.layer == 6)
-            {
-                try
-                {
-                    collision.gameObject.GetComponent<Rigidbody>().velocity = Vector3.forward * 7f;
-                }
-                catch { }
-            }
-        }*/
+        [SerializeField] int _groundTouches = 0;
 
+        private void OnCollisionEnter(Collision collision)
+        {
+            if(collision.gameObject.layer == 3)
+            {
+                _groundTouches++;
+            }    
+        }
+
+        private void OnCollisionExit(Collision collision)
+        {
+            if (collision.gameObject.layer == 3)
+            {
+                _groundTouches--;
+            }
+        }
         #endregion
 
 
