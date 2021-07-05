@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using PT.GunPlay;
 using RootMotion.FinalIK;
+using DG.Tweening;
 
 namespace PT.Bike
 {
@@ -11,19 +12,24 @@ namespace PT.Bike
     public class PlayerBikeController : MonoBehaviour
     {
         #region publics
+        public Transform _gunTargetT;
+
         public void ActivateShootingMode()
         {
             _gun.gameObject.SetActive(true);
-            _ik.solver.rightHandEffector.positionWeight = 0;
-            _ik.solver.rightHandEffector.rotationWeight = 0;
+
+            DOTween.To(() => _ik.solver.rightHandEffector.positionWeight, (x) => { _ik.solver.rightHandEffector.positionWeight = x; }, 0, 0.5f);
+            DOTween.To(() => _ik.solver.rightHandEffector.rotationWeight, (x) => { _ik.solver.rightHandEffector.rotationWeight = x; }, 0, 0.5f);
+            DOTween.To(() => _cameraAimIK.solver.IKPositionWeight, (x) => { _cameraAimIK.solver.IKPositionWeight = x; }, 1, 0.5f);
             _isInShootingMode = true;
         }
 
         public void DeactivateShootingMode()
         {
             _gun.gameObject.SetActive(false);
-            _ik.solver.rightHandEffector.positionWeight = 1;
-            _ik.solver.rightHandEffector.rotationWeight = 1;
+            DOTween.To(() => _ik.solver.rightHandEffector.positionWeight, (x) => { _ik.solver.rightHandEffector.positionWeight = x; }, 1, 0.5f);
+            DOTween.To(() => _ik.solver.rightHandEffector.rotationWeight, (x) => { _ik.solver.rightHandEffector.rotationWeight = x; }, 1, 0.5f);
+            DOTween.To(() => _cameraAimIK.solver.IKPositionWeight, (x) => { _cameraAimIK.solver.IKPositionWeight = x; }, 0, 0.5f);
             _isInShootingMode = false;
         }
         #endregion
@@ -32,6 +38,7 @@ namespace PT.Bike
         [SerializeField] private bool _isInShootingMode = false, _testMode = false;
 
         [SerializeField] private FullBodyBipedIK _ik;
+        [SerializeField] private AimIK _cameraAimIK;
         [SerializeField] private Gun _gun;
 
         [SerializeField] private float _switchEach = 10f;
@@ -40,8 +47,11 @@ namespace PT.Bike
         private BikeController _bikeController;
         private GunController _gunController;
 
+        private Vector3 _starterTargetOffset;
+
         private void Start()
         {
+            _starterTargetOffset = _gunTargetT.position - transform.position;
             _inputManager = TouchInputManager.Instance;
             _bikeController = GetComponent<BikeController>();
             _gunController = GetComponent<GunController>();

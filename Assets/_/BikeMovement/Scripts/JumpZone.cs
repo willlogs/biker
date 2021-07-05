@@ -11,6 +11,7 @@ namespace PT.Bike
     public class JumpZone : MonoBehaviour
     {
         public SplineComputer spline;
+        public float duration = 4;
 
         public UnityEvent<Transform> OnPlayerEntered;
 
@@ -20,17 +21,19 @@ namespace PT.Bike
             if(bc != null)
             {
                 PlayerBikeController pbc = other.GetComponent<PlayerBikeController>();
+
+                // set rotation
                 other.transform.DORotateQuaternion(Quaternion.LookRotation((spline.GetPoint(0).tangent2 - spline.GetPoint(0).position).normalized, spline.GetPoint(0).normal), 0.5f).OnComplete(() =>
                 {
-                    bc.FollowSpline();
+                    bc.FollowSpline(duration);
                     bc.splineFollower.spline = spline;
-                    bc.splineFollower.transform.position = spline.GetPoint(0).position;
-                    bc.splineFollower.motion.offset = transform.position - spline.GetPoint(0).position;
+                    bc.splineFollower.motion.offset = bc.transform.position - spline.GetPoint(0).position;
                     bc.splineFollower.enabled = true;
                     bc.DeactivateControl();
                     
                     if (pbc != null)
                     {
+                        pbc._gunTargetT.position = pbc.transform.position + pbc.transform.forward * 5 + pbc.transform.up * 2;
                         pbc.ActivateShootingMode();
                         OnPlayerEntered?.Invoke(other.transform);
 

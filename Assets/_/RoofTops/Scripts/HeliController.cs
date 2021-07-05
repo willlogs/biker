@@ -38,6 +38,7 @@ namespace PT.Rooftop
         [SerializeField] private Material _destroyedMat;
         [SerializeField] private Renderer _renderer;
         [SerializeField] private bool _isLast = false;
+        [SerializeField] private int _shotsToDestruction = 5;
 
         private bool _isFollowing = false, _thirdStage = false, _isDead = false;
         private float _percentage = 0;
@@ -87,21 +88,14 @@ namespace PT.Rooftop
         {
             if(collision.gameObject.layer == 9 && !_isDead)
             {
-                if (_isLast)
+                _takenBulletsCount++;
+                GameObject go = Instantiate(_smokePrefab);
+                go.transform.position = collision.GetContact(0).point;
+                go.transform.parent = transform;
+
+                if(_takenBulletsCount > _shotsToDestruction)
                 {
                     BlowUp();
-                }
-                else
-                {
-                    _takenBulletsCount++;
-                    GameObject go = Instantiate(_smokePrefab);
-                    go.transform.position = collision.GetContact(0).point;
-                    go.transform.parent = transform;
-
-                    if(_takenBulletsCount > 5)
-                    {
-                        BlowUp();
-                    }
                 }
             }
         }

@@ -53,36 +53,43 @@ namespace PT.Bike
             _canControl = true;
         }
 
-        public void FollowSpline()
+        public void FollowSpline(float duration = 4)
         {
-            _followingSpline = true;
-            _rb.isKinematic = true;
-            _splineFollowerT.parent = null;
-            _position = 0;
+            if (!_followingSpline)
+            {
+                _splineDuration = duration;
+                _followingSpline = true;
+                _rb.isKinematic = true;
+                _splineFollowerT.parent = null;
+                _position = 0;
 
-            _positionTween = DOTween.To(() => _position, (x) =>{ _position = x;  }, 1f, _splineDuration).SetEase(Ease.Linear);
+                _positionTween = DOTween.To(() => _position, (x) => { _position = x; }, 1f, _splineDuration).SetEase(Ease.Linear);
+            }
         }
 
         public void DontFollowSpline()
         {
-            _followingSpline = false;
-            _rb.isKinematic = false;
-
-            try
+            if (_followingSpline)
             {
-                Destroy(splineFollower.spline.gameObject);
-                Destroy(splineFollower);
+                _followingSpline = false;
+                _rb.isKinematic = false;
+
+                try
+                {
+                    Destroy(splineFollower);
+                    Destroy(splineFollower.spline.gameObject);
+                }
+                catch { }
+
+                splineFollower = _splineFollowerT.gameObject.AddComponent<SplinePositioner>();
+
+                _splineFollowerT.position = transform.position;
+                _splineFollowerT.parent = transform;
+
+                _rb.velocity = transform.forward * 10f;
+                _position = 0;
+                _positionTween.Kill();
             }
-            catch { }
-
-            splineFollower = _splineFollowerT.gameObject.AddComponent<SplinePositioner>();
-
-            _splineFollowerT.position = transform.position;
-            _splineFollowerT.parent = transform;
-
-            _rb.velocity = transform.forward * 10f;
-            _position = 0;
-            _positionTween.Kill();
         }
 
         #endregion

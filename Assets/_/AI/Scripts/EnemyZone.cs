@@ -3,12 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using PT.Bike;
 using PT.Utils;
+using Dreamteck.Splines;
+using DG.Tweening;
 
 namespace PT.AI
 {
     public class EnemyZone : MonoBehaviour
     {
+        public SplineComputer spline;
+        public float duration, slowmoFactor = 0.1f, endTimer = 4;
+
         [SerializeField] private AIPedesterian[] _enemies;
+        [SerializeField] private Transform _targetTransform;
 
         private int _count;
         private PlayerBikeController _player;
@@ -57,19 +63,61 @@ namespace PT.AI
                     _isIn = true;
                     _player = pbc;
                     pbc.ActivateShootingMode();
-                    TimeManager.Instance.SlowDown(0.5f, 0.1f);
+                    pbc._gunTargetT.DOMove(_targetTransform.position, 0.5f).SetUpdate(true);
+                    TimeManager.Instance.SlowDown(0.5f, slowmoFactor);
+
+                    /*BikeController bc = other.GetComponent<BikeController>();
+                    if (bc != null)
+                    {
+                        FollowSpline(bc);
+                    }*/
                 }
             }
         }
 
         private void OnTriggerExit(Collider other)
         {
+            EndIt();
+        }
+
+        private void EndIt()
+        {
             if (_isIn)
             {
                 _isIn = false;
                 _player.DeactivateShootingMode();
                 TimeManager.Instance.GoNormal(0.5f);
+
+                /*BikeController bc = other.GetComponent<BikeController>();
+                if (bc != null)
+                {
+                    DontFollowSpline(bc);
+                }*/
             }
+        }
+
+        private IEnumerator EndWithTimer()
+        {
+            yield return new WaitForSecondsRealtime(endTimer);
+            EndIt();
+        }
+
+        private void FollowSpline(BikeController bc)
+        {
+            bc.FollowSpline(duration);
+            bc.splineFollower.spline = spline;
+            bc.splineFollower.transform.position = spline.GetPoint(0).position;
+            bc.splineFollower.motion.offset = bc.transform.position - spline.GetPoint(0).position;
+            bc.splineFollower.enabled = true;
+            bc.DeactivateControl();
+        }
+
+        private static void DontFollowSpline(BikeController bc)
+        {
+            bc.DontFollowSpline();
+            bc.splineFollower.spline = null;
+            bc.splineFollower.enabled = false;
+            bc.ActivateControl();
         }
     }
 }
