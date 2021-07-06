@@ -11,6 +11,8 @@ namespace PT.Bike
     public class PlayerBikeController : MonoBehaviour
     {
         #region publics
+        public TraceFollower traceFollower;
+
         public void ActivateShootingMode()
         {
             _gun.gameObject.SetActive(true);

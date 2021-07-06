@@ -28,18 +28,18 @@ namespace PT.Utils
 
         private bool _isSlow = false;
 
-        public void SlowDown(float duration)
+        public void SlowDown(float duration, float factor = 0.3f)
         {
             if (!_isSlow)
             {
                 _isSlow = true;
                 if (duration == 0)
                 {
-                    SetSpeed(0.3f);
+                    SetSpeed(factor);
                 }
                 else
                 {
-                    SetSpeedTweener(duration, 0.3f);
+                    SetSpeedTweener(duration, factor);
                 }
             }
         }

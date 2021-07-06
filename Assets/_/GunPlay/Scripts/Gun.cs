@@ -57,6 +57,7 @@ namespace PT.GunPlay
         [SerializeField] private int _chunkSize = 1;
         [SerializeField] private float _spread = 0f;
         [SerializeField] private Rigidbody _parentRB;
+        [SerializeField] private bool _unscaled = false;
 
         [SerializeField] private LayerMask layerMask;
 
@@ -73,7 +74,14 @@ namespace PT.GunPlay
         {
             if (_isCoolingDown)
             {
-                _coolDownTimer += Time.deltaTime;
+                if (_unscaled)
+                {
+                    _coolDownTimer += Time.unscaledDeltaTime;
+                }
+                else
+                {
+                    _coolDownTimer += Time.deltaTime;
+                }
 
                 if(_coolDownTimer > _coolDownTime)
                 {

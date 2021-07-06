@@ -12,7 +12,7 @@ namespace PT.GunPlay
         {
             if(diff.magnitude > 0)
             {
-                _gunAimingTarget.Translate(diff * Time.deltaTime * _targetMovementSpeed);
+                _gunAimingTarget.Translate(diff * Time.unscaledDeltaTime * _targetMovementSpeed);
             }
 
             if (hasInput)

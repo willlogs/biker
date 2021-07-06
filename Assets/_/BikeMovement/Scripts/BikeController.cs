@@ -13,7 +13,7 @@ namespace PT.Bike
 
         public void Steer(Vector3 diff, bool hasInput)
         {
-            if (_canControl)
+            if (_canControl && _grounded)
             {
                 //transform.Rotate(0, diff.x * Time.deltaTime * _mdRotationSpeed, 0);
                 Quaternion before = transform.rotation;
@@ -23,17 +23,14 @@ namespace PT.Bike
                 if (hasInput)
                 {
                     Accelerate();
-                }
-                else
-                {
-                    //DeAccelerate();
+                    AlignVelocity();
                 }
             }
         }
 
         public void Accelerate()
         {
-            _rb.velocity += transform.forward * _acc;            
+            _rb.velocity += transform.forward * _acc;
 
             if(_rb.velocity.magnitude > _maxSpeed)
             {
@@ -94,10 +91,12 @@ namespace PT.Bike
 
         #region privates
 
-        [SerializeField] private Transform _steeringWheelT, _bikeBaseT, _centerOfMass, _splineFollowerT;
+        [SerializeField] private Transform _steeringWheelT, _bikeBaseT, _centerOfMass, _splineFollowerT, _groundRayStartT;
         [SerializeField] private float _maxSpeed, _maxAngleDiff = 35, _rotationSpeed, _mdRotationSpeed = 20, _acc, _splineDuration = 5;
         [SerializeField] private Rigidbody _rb, _followerRB;
         [SerializeField] private Animator _animator;
+        [SerializeField] private LayerMask _groundDetectorMask;
+        [SerializeField] private bool _grounded = false;
 
         private float _curSpeed, _position = 0;
         private bool _canControl = true, _followingSpline;
@@ -115,10 +114,10 @@ namespace PT.Bike
 
         private void Update()
         {
-            if (_canControl)
-            {
-                AlignVelocity();
-            }
+            Ray r = new Ray(_groundRayStartT.position, Vector3.down);
+            RaycastHit info;
+            Physics.Raycast(r, out info, 0.5f, _groundDetectorMask, QueryTriggerInteraction.Ignore);
+            _grounded = info.collider != null;
 
             RotateWheel();
 

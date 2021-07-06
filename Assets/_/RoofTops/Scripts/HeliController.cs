@@ -37,7 +37,8 @@ namespace PT.Rooftop
         [SerializeField] private GameObject _smokePrefab, _explosionPrefab;
         [SerializeField] private Material _destroyedMat;
         [SerializeField] private Renderer _renderer;
-        [SerializeField] private bool _isLast = false;
+        [SerializeField] private bool _isLast = false, _canBeDestroyed = false;
+        [SerializeField] private int _shotsBeforeDestruction = 3;
 
         private bool _isFollowing = false, _thirdStage = false, _isDead = false;
         private float _percentage = 0;
@@ -81,32 +82,36 @@ namespace PT.Rooftop
             });
         }
 
+        private int _shotsReceived = 0;
         private void OnCollisionEnter(Collision collision)
         {
             if(collision.gameObject.layer == 9 && !_isDead)
             {
-                if (_isLast)
+                _shotsReceived++;
+                GameObject go = Instantiate(_smokePrefab);
+                go.transform.position = collision.GetContact(0).point;
+                go.transform.parent = transform;
+
+                if(_shotsReceived > _shotsBeforeDestruction)
                 {
                     BlowUp();
-                }
-                else
-                {
-                    GameObject go = Instantiate(_smokePrefab);
-                    go.transform.position = collision.GetContact(0).point;
-                    go.transform.parent = transform;
                 }
             }
         }
 
         private void BlowUp()
         {
-            _isDead = true;
             TimeManager.Instance.GoNormal(0.5f);
-            _isFollowing = false;
-            GameObject go = Instantiate(_explosionPrefab);
-            go.transform.position = transform.position;
-            _renderer.material = _destroyedMat;
-            gameObject.AddComponent<Rigidbody>();
+
+            if (_canBeDestroyed)
+            {
+                _isDead = true;
+                _isFollowing = false;
+                GameObject go = Instantiate(_explosionPrefab);
+                go.transform.position = transform.position;
+                _renderer.material = _destroyedMat;
+                gameObject.AddComponent<Rigidbody>();
+            }
         }
     }
 }

@@ -1,6 +1,7 @@
 using DG.Tweening;
 using PT.GunPlay;
 using RootMotion.FinalIK;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,6 +11,8 @@ namespace PT.AI
     public class AIPedesterian : MonoBehaviour
     {
         public Transform[] waypointsT;
+
+        public event Action OnDeath;
 
         [SerializeField] private float _waitBetweenWPs = 5, _movingSpeed = 4, _turnDuration = 1f, _health = 10f;
         [SerializeField] private Animator _animator;
@@ -78,6 +81,8 @@ namespace PT.AI
             _gun.gameObject.AddComponent<BoxCollider>();
             _aimIK.enabled = false;
 
+            OnDeath?.Invoke();
+
             Destroy(_animator);
             Destroy(_rb);
             Destroy(gameObject, 5);
@@ -109,7 +114,7 @@ namespace PT.AI
                     if(c.gameObject.layer == 6)
                         try
                         {
-                            c.GetComponent<Rigidbody>().velocity = (Vector3.forward + Vector3.up).normalized * 20;
+                            c.GetComponent<Rigidbody>().velocity = (Vector3.forward + Vector3.up * 0.2f).normalized * 60;
                         }
                         catch { }
                 }                

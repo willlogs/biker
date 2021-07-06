@@ -580,6 +580,7 @@ GameObject:
   - component: {fileID: 5738418592962535183}
   - component: {fileID: 8812867897938271243}
   - component: {fileID: 4243741049013710159}
+  - component: {fileID: 945836114564022780}
   m_Layer: 8
   m_Name: BikerPlayerController
   m_TagString: Untagged
@@ -603,6 +604,7 @@ Transform:
   - {fileID: 4836468425650898299}
   - {fileID: 6577625329965863981}
   - {fileID: 1189186935}
+  - {fileID: 5909950941656420268}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -653,15 +655,20 @@ MonoBehaviour:
   _bikeBaseT: {fileID: 4767750404437399278}
   _centerOfMass: {fileID: 688662762}
   _splineFollowerT: {fileID: 1189186935}
+  _groundRayStartT: {fileID: 5909950941656420268}
   _maxSpeed: 20
   _maxAngleDiff: 45
   _rotationSpeed: 3
-  _mdRotationSpeed: 15
+  _mdRotationSpeed: 25
   _acc: 1
   _splineDuration: 7
   _rb: {fileID: 2911586316592682963}
   _followerRB: {fileID: 1189186936}
   _animator: {fileID: 7008786149579004675}
+  _groundDetectorMask:
+    serializedVersion: 2
+    m_Bits: 8
+  _grounded: 0
 --- !u!114 &2615529206186151389
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -674,6 +681,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3c4e2f06719f664bb9214615ee28a6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  traceFollower: {fileID: 945836114564022780}
   _isInShootingMode: 0
   _testMode: 0
   _ik: {fileID: 1844256248053600211}
@@ -749,6 +757,23 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.78926075, y: 0.9247782, z: 1.2578021}
   m_Center: {x: 3.5116948e-11, y: 1.3208338, z: -0.060019907}
+--- !u!114 &945836114564022780
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4378742349649713808}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e138c9942b065cd4085a75d7437cc8ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  trace: []
+  _isFollowingTrace: 0
+  _bc: {fileID: 6365132844723934976}
+  _index: 0
+  _tolerance: 3
 --- !u!1 &5167801177738850274
 GameObject:
   m_ObjectHideFlags: 0
@@ -779,6 +804,36 @@ Transform:
   - {fileID: 7008786149586203889}
   m_Father: {fileID: 7008786149586203875}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &5912550180249379613
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5909950941656420268}
+  m_Layer: 8
+  m_Name: groundDetectorRayStart
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5909950941656420268
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5912550180249379613}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.216, z: -0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8718700555740139405}
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7008786149586299009
 GameObject:
@@ -3479,9 +3534,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2911586316592682963}
     - target: {fileID: 5207946732169116338, guid: d15165dd1884aba44b21f14ac1f6a796, type: 3}
+      propertyPath: _unscaled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5207946732169116338, guid: d15165dd1884aba44b21f14ac1f6a796, type: 3}
       propertyPath: _gunTargetT
       value: 
       objectReference: {fileID: 4305645067155986248}
+    - target: {fileID: 5207946732169116338, guid: d15165dd1884aba44b21f14ac1f6a796, type: 3}
+      propertyPath: _coolDownTime
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 6018154271703253840, guid: d15165dd1884aba44b21f14ac1f6a796, type: 3}
       propertyPath: m_RootOrder
       value: 0
