@@ -12,6 +12,7 @@ namespace PT.Rooftop
         [SerializeField] private AIPedesterian[] _enemies;
         [SerializeField] private Transform[] _trace;
         [SerializeField] private float _slowMoFactor;
+        [SerializeField] private bool _traceFollower = true;
 
         private bool _isIn = false;
         private int _count;
@@ -50,6 +51,10 @@ namespace PT.Rooftop
         private void ReduceCount()
         {
             _count--;
+            if(_count <= 0)
+            {
+                GoOut();
+            }
         }
 
         private void OnTriggerEnter(Collider other)
@@ -62,7 +67,10 @@ namespace PT.Rooftop
                     _isIn = true;
 
                     pbc.ActivateShootingMode();
-                    pbc.traceFollower.FollowTrace(_trace);
+
+                    if(_traceFollower)
+                        pbc.traceFollower.FollowTrace(_trace);
+
                     _player = pbc;
 
                     TimeManager.Instance.SlowDown(0.5f, _slowMoFactor);
@@ -72,11 +80,21 @@ namespace PT.Rooftop
 
         private void OnTriggerExit(Collider other)
         {
-            if (_isIn && other.gameObject.layer == 8)
+            if (other.gameObject.layer == 8)
+            {
+                GoOut();
+            }
+        }
+
+        private void GoOut()
+        {
+            if (_isIn)
             {
                 _isIn = false;
                 _player.DeactivateShootingMode();
-                _player.traceFollower.DontFollowTrace();
+
+                if (_traceFollower)
+                    _player.traceFollower.DontFollowTrace();
 
                 TimeManager.Instance.GoNormal(0.5f);
             }

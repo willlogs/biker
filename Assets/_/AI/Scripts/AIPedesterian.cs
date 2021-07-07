@@ -22,6 +22,8 @@ namespace PT.AI
         [SerializeField] private Transform _targetT, _aimTarget;
         [SerializeField] private AimIK _aimIK;
         [SerializeField] private Gun _gun;
+        [SerializeField] private LayerMask _crashImpactLayer;
+        [SerializeField] private Rigidbody _hipsRB;
 
         private bool _isMoving, _aiming;
         private Tweener _currTweener, _rotationTweener;
@@ -77,9 +79,8 @@ namespace PT.AI
             _rotationTweener.Kill();
             _currTweener.Kill();
             _gun.transform.parent = null;
-            _gun.gameObject.AddComponent<Rigidbody>();
-            _gun.gameObject.AddComponent<BoxCollider>();
             _aimIK.enabled = false;
+            _hipsRB.velocity = Vector3.forward * 200 + Vector3.up * 50;
 
             OnDeath?.Invoke();
 
@@ -100,24 +101,10 @@ namespace PT.AI
 
         private void OnCollisionEnter(Collision collision)
         {
-            bool _smash = false;
-
             switch (collision.gameObject.layer)
             {
                 case 9: Hurt(); break;
-                case 8: Die(); _smash = true; break;
-            }
-
-            if (_smash) {
-                foreach(Collider c in Physics.OverlapSphere(collision.GetContact(0).point, 0.4f))
-                {
-                    if(c.gameObject.layer == 6)
-                        try
-                        {
-                            c.GetComponent<Rigidbody>().velocity = (Vector3.forward + Vector3.up * 0.2f).normalized * 60;
-                        }
-                        catch { }
-                }                
+                case 8: Die(); break;
             }
         }
 
@@ -129,7 +116,10 @@ namespace PT.AI
                 _targetT = other.transform;
                 _animator.SetBool("Walk", false);
                 _animator.SetBool("Aim", true);
+
                 _aimIK.enabled = true;
+                _aimIK.solver.IKPositionWeight = 0;
+                DOTween.To(() => _aimIK.solver.IKPositionWeight, (x) => { _aimIK.solver.IKPositionWeight = x; }, 1f, 1f).SetUpdate(true);
             }
         }
 

@@ -4,11 +4,10 @@
 Material:
   serializedVersion: 6
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Sky
-  m_Shader: {fileID: 4800000, guid: 109b5f6987709cf4aaa0449d802e92ea, type: 3}
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: Simple Fog
+  m_Shader: {fileID: 4800000, guid: c215ac411a6c34a4d9fc408e78f942ed, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -60,10 +59,10 @@ Material:
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
-    - _Exp: 1
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
+    - _Intensity: 0.15
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
@@ -74,10 +73,5 @@ Material:
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
-    - _BottomColor: {r: 0, g: 0.7568628, b: 1, a: 0}
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Color: {r: 0.8161765, g: 0.8161765, b: 0.8161765, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _MiddleColor: {r: 0, g: 0.7563188, b: 1, a: 1}
-    - _TopColor: {r: 0, g: 1, b: 0.8105297, a: 0}
-    - _Up: {r: 0, g: 1, b: 0, a: 0}
-  m_BuildTextureStacks: []

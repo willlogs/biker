@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: mat1
-  m_Shader: {fileID: 4800000, guid: 1580609dacd47443696f4ffccebbc416, type: 3}
+  m_Shader: {fileID: 4800000, guid: 8fa84e1c8f3a97b4bb416e8eb087630e, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -39,11 +39,19 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _EmmisTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _MainTex:
         m_Texture: {fileID: 2800000, guid: 55338b0ff928444fb8c90e1cac5c350b, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _NormalTex:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -68,14 +76,24 @@ Material:
     - _FogHeight: 0.1
     - _FogStart: 0
     - _FogYStartPos: 0.1
+    - _FresnelBrightness: 0
+    - _FresnelPower: 0
+    - _FresnelShadowDropoff: 0
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
+    - _HighIntensity: 3.85
+    - _LightScalar: 1
     - _LightmapPower: 1
+    - _LowIntensity: 9.05
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
+    - _OutlineSize: 3.49
     - _Parallax: 0.02
+    - _RampLevels: 2
+    - _RimAlpha: 0
+    - _RimDropOff: 0
     - _RimPower: 1.07
     - _ShadowPower: 1
     - _Shininess: 0.078125
@@ -92,12 +110,16 @@ Material:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _FogColor: {r: 1, g: 1, b: 1, a: 1}
+    - _FresnelColor: {r: 1, g: 1, b: 1, a: 1}
     - _FrontColor: {r: 1, g: 1, b: 1, a: 0}
+    - _HighColor: {r: 0.28627452, g: 1, b: 0.95294124, a: 1}
     - _LightDirF: {r: 0, g: 0, b: -1, a: 1}
     - _LightDirR: {r: 1, g: 0, b: 0, a: 1}
     - _LightDirT: {r: 0, g: 1, b: 0, a: 1}
     - _LightTint: {r: 1, g: 1, b: 1, a: 0}
     - _LightmapColor: {r: 0, g: 0, b: 0, a: 0}
+    - _LowColor: {r: 0.28773582, g: 1, b: 0.9523478, a: 1}
+    - _OutlineColor: {r: 0.36841306, g: 1, b: 0.3443396, a: 1}
     - _RightColor: {r: 1, g: 1, b: 1, a: 0}
     - _RimColor: {r: 1, g: 1, b: 1, a: 0}
     - _TopColor: {r: 1, g: 1, b: 1, a: 0}

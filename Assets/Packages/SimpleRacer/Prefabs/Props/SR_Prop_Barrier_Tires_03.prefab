@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 438062}
   - component: {fileID: 3389720}
   - component: {fileID: 2350394}
+  - component: {fileID: 3927604701267409657}
   m_Layer: 0
   m_Name: SR_Prop_Barrier_Tires_03
   m_TagString: Untagged
@@ -81,3 +82,17 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &3927604701267409657
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 199398}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300000, guid: 6aa6ff59c516fef4d9c37e9ae4a318db, type: 3}

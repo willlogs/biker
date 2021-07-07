@@ -7,11 +7,10 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: SimpleCity_Texture
-  m_Shader: {fileID: 4800000, guid: 1580609dacd47443696f4ffccebbc416, type: 3}
+  m_Name: RoofTop_Ledge
+  m_Shader: {fileID: 4800000, guid: 7ffc1bc2bbb1ef64f84b552b2d2f0619, type: 3}
   m_ShaderKeywords: TCP2_REFLECTIONS_FRESNEL TCP2_RIM_LIGHTING_LIGHTMASK TCP2_UV_NORMALS_FULL
-    USE_DIST_FOG
-  m_LightmapFlags: 1
+  m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
@@ -21,8 +20,8 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BaseMap:
-        m_Texture: {fileID: 2800000, guid: 0447cd66508e8bf4aa944d7b9347472c, type: 3}
-        m_Scale: {x: 1, y: 1}
+        m_Texture: {fileID: 2800000, guid: 5c7be35ecc10807428a13967d89b0458, type: 3}
+        m_Scale: {x: 1, y: 15.14}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
         m_Texture: {fileID: 0}
@@ -45,7 +44,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 0447cd66508e8bf4aa944d7b9347472c, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MatCapMask:
@@ -85,7 +84,6 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _AmbientPower: 0
     - _BumpScale: 1
     - _Cull: 2
     - _Cutoff: 0.5
@@ -93,22 +91,13 @@ Material:
     - _DirectIntensityOutline: 1
     - _DstBlend: 0
     - _EmissionChannel: 4
-    - _EmissionScaleUI: 0
-    - _FogAnimationFreq: 0.1
-    - _FogAnimationHeight: 0.1
-    - _FogDensity: 1
-    - _FogEnd: 200
-    - _FogHeight: 0.1
-    - _FogStart: 100
-    - _FogYStartPos: 0.1
     - _FresnelMax: 1.5
     - _FresnelMin: 0
     - _GlossMapScale: 1
-    - _Glossiness: 0
+    - _Glossiness: 0.5
     - _GlossyReflections: 1
     - _IndirectIntensity: 1
     - _IndirectIntensityOutline: 0
-    - _LightmapPower: 1
     - _MatCapMaskChannel: 0
     - _MatCapType: 0
     - _Metallic: 0
@@ -130,7 +119,7 @@ Material:
     - _RampOffset: 0
     - _RampScale: 1
     - _RampSmoothing: 0.1
-    - _RampThreshold: 0.37
+    - _RampThreshold: 0.75
     - _RampType: 0
     - _ReceiveShadowsOff: 1
     - _ReflectionMapType: 0
@@ -138,8 +127,6 @@ Material:
     - _RenderingMode: 0
     - _RimMax: 1
     - _RimMin: 0.5
-    - _RimPower: 1.01
-    - _ShadowPower: 1
     - _SingleIndirectColor: 0
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
@@ -151,11 +138,8 @@ Material:
     - _SrcBlend: 1
     - _UVSec: 0
     - _UseAlphaTest: 0
-    - _UseDirLight: 0
     - _UseEmission: 0
-    - _UseFogDistance: 1
     - _UseFresnelReflections: 1
-    - _UseLightMap: 0
     - _UseMatCap: 0
     - _UseMatCapMask: 0
     - _UseMobileMode: 0
@@ -169,25 +153,14 @@ Material:
     - _UseSpecular: 0
     - _ZWrite: 1
     m_Colors:
-    - _AmbientColor: {r: 0.5, g: 0.1, b: 0.2, a: 0}
-    - _BaseColor: {r: 0.5707547, g: 0.95250094, b: 1, a: 1}
+    - _BaseColor: {r: 0.5471698, g: 0.5471698, b: 0.5471698, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _EmissionColor: {r: 0.4716981, g: 0.4716981, b: 0.4716981, a: 0}
-    - _EmissionColorUI: {r: 1, g: 1, b: 1, a: 1}
-    - _FogColor: {r: 0, g: 0.8352942, b: 0.93725497, a: 1}
-    - _FrontColor: {r: 0.33490568, g: 1, b: 0.9847688, a: 0}
+    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _HColor: {r: 1, g: 1, b: 1, a: 1}
-    - _LightDirF: {r: 0, g: 0, b: -1, a: 1}
-    - _LightDirR: {r: 1, g: 0, b: 0, a: 1}
-    - _LightDirT: {r: 0, g: 1, b: 0, a: 1}
-    - _LightTint: {r: 1, g: 1, b: 1, a: 0}
-    - _LightmapColor: {r: 0, g: 0, b: 0, a: 0}
     - _MatCapColor: {r: 1, g: 1, b: 1, a: 1}
     - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
     - _ReflectionColor: {r: 1, g: 1, b: 1, a: 1}
-    - _RightColor: {r: 0, g: 1, b: 0.9826088, a: 0}
-    - _RimColor: {r: 1, g: 1, b: 1, a: 0.5}
-    - _SColor: {r: 0.8773585, g: 0.8773585, b: 0.8773585, a: 1}
+    - _RimColor: {r: 0.8, g: 0.8, b: 0.8, a: 0.5}
+    - _SColor: {r: 1, g: 1, b: 1, a: 1}
     - _SpecularColor: {r: 0.75, g: 0.75, b: 0.75, a: 1}
-    - _TopColor: {r: 0, g: 0.9245283, b: 0.90051454, a: 0}
   m_BuildTextureStacks: []

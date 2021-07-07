@@ -34,6 +34,8 @@ namespace PT.Bike
         [SerializeField] private bool _isInShootingMode = false, _testMode = false;
 
         [SerializeField] private FullBodyBipedIK _ik;
+        [SerializeField] private AimIK _aimIK;
+        [SerializeField] private Transform _gunAimTargetT;
         [SerializeField] private Gun _gun;
 
         [SerializeField] private float _switchEach = 10f;
