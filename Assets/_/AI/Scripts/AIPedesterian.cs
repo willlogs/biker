@@ -80,7 +80,7 @@ namespace PT.AI
             _currTweener.Kill();
             _gun.transform.parent = null;
             _aimIK.enabled = false;
-            _hipsRB.velocity = Vector3.forward * 200 + Vector3.up * 50;
+            _hipsRB.velocity = Vector3.forward * 400 + Vector3.up * 50;
 
             OnDeath?.Invoke();
 

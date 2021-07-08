@@ -92,7 +92,7 @@ namespace PT.Bike
         #region privates
 
         [SerializeField] private Transform _steeringWheelT, _bikeBaseT, _centerOfMass, _splineFollowerT, _groundRayStartT;
-        [SerializeField] private float _maxSpeed, _maxAngleDiff = 35, _rotationSpeed, _mdRotationSpeed = 20, _acc, _splineDuration = 5;
+        [SerializeField] private float _maxSpeed, _maxAngleDiff = 35, _rotationSpeed, _mdRotationSpeed = 20, _acc, _splineDuration = 5, _angularVelocityAgeFactor = 0.1f;
         [SerializeField] private Rigidbody _rb, _followerRB;
         [SerializeField] private Animator _animator;
         [SerializeField] private LayerMask _groundDetectorMask;
@@ -101,6 +101,8 @@ namespace PT.Bike
         private float _curSpeed, _position = 0;
         private bool _canControl = true, _followingSpline;
         private Tweener _positionTween;
+
+        private float _zQAngularVelocity;
 
         private void Start()
         {
@@ -118,6 +120,8 @@ namespace PT.Bike
             RaycastHit info;
             Physics.Raycast(r, out info, 0.5f, _groundDetectorMask, QueryTriggerInteraction.Ignore);
             _grounded = info.collider != null;
+
+            _zQAngularVelocity = (1 - _angularVelocityAgeFactor) * _zQAngularVelocity + _angularVelocityAgeFactor * transform.rotation.z;
 
             RotateWheel();
 
@@ -156,7 +160,9 @@ namespace PT.Bike
                     Time.deltaTime * _rotationSpeed
             );
 
-            _bikeBaseT.localRotation = Quaternion.Lerp(
+            print(_zQAngularVelocity);
+            _rb.angularVelocity = new Vector3(_rb.angularVelocity.x, _rb.angularVelocity.y, _rb.angularVelocity.z - _zQAngularVelocity);
+            /*_bikeBaseT.localRotation = Quaternion.Lerp(
                 _bikeBaseT.localRotation,
                 Quaternion.Euler(
                     _bikeBaseT.localRotation.x,
@@ -164,20 +170,8 @@ namespace PT.Bike
                     -_maxAngleDiff * qy * 3
                 ),
                 Time.deltaTime * _rotationSpeed
-            );
+            );*/
         }
-
-        /*private void OnCollisionEnter(Collision collision)
-        {
-            if(collision.gameObject.layer == 6)
-            {
-                try
-                {
-                    collision.gameObject.GetComponent<Rigidbody>().velocity = Vector3.forward * 7f;
-                }
-                catch { }
-            }
-        }*/
 
         #endregion
 

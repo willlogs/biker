@@ -54,6 +54,10 @@ namespace PT.Rooftop
 
                 if(!_thirdStage)
                     targetP.z = _targetT.position.z + _zOffset;
+                else
+                {
+                    targetP.z = transform.position.z;
+                }
 
                 transform.position = Vector3.Lerp(transform.position, targetP, Time.deltaTime * _followSpeed);
             }
@@ -101,6 +105,7 @@ namespace PT.Rooftop
 
         private void BlowUp()
         {
+            _thirdStage = true;
             TimeManager.Instance.GoNormal(0.5f);
 
             if (_canBeDestroyed)
