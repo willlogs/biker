@@ -13,7 +13,6 @@ namespace PT.Bike
             if (bc != null)
             {
                 bc.DontFollowSpline();
-                bc.splineFollower.spline = null;
                 bc.splineFollower.enabled = false;
                 bc.ActivateControl();
 

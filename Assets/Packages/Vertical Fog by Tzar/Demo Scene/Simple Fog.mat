@@ -4,10 +4,11 @@
 Material:
   serializedVersion: 6
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_Name: Simple Fog
-  m_Shader: {fileID: 4800000, guid: c215ac411a6c34a4d9fc408e78f942ed, type: 3}
+  m_Shader: {fileID: 4800000, guid: d1e65bfaeebd0b442b0dfba0ce2c5adf, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -62,7 +63,7 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
-    - _Intensity: 0.15
+    - _Intensity: 0.015
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
@@ -75,3 +76,4 @@ Material:
     m_Colors:
     - _Color: {r: 0.8161765, g: 0.8161765, b: 0.8161765, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+  m_BuildTextureStacks: []

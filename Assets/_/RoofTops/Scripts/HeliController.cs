@@ -1,6 +1,6 @@
 using DG.Tweening;
-using Dreamteck.Splines;
 using PT.Utils;
+using FluffyUnderware.Curvy.Controllers;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditorInternal;
@@ -16,7 +16,7 @@ namespace PT.Rooftop
             {
                 _isFollowing = true;
                 _thirdStage = false;
-                _percentage = 0;
+                _splinePositioner.Position = 0;
                 _targetT = target;
                 BeforeDelay();
             }
@@ -27,11 +27,11 @@ namespace PT.Rooftop
             if (_isFollowing)
             {
                 _isFollowing = false;
-                _percentage = 0;
+                _splinePositioner.Position = 0;
             }
         }
 
-        [SerializeField] private SplinePositioner _splinePositioner;
+        [SerializeField] private SplineController _splinePositioner;
         [SerializeField] private float _reachTime, _delayTime, _tillStopTime, _followSpeed = 10f, _zOffset = 5;
         [SerializeField] private Transform _targetT;
         [SerializeField] private GameObject _smokePrefab, _explosionPrefab;
@@ -41,7 +41,6 @@ namespace PT.Rooftop
         [SerializeField] private int _shotsBeforeDestruction = 3;
 
         private bool _isFollowing = false, _thirdStage = false, _isDead = false;
-        private float _percentage = 0;
 
         private Tweener _tweener;
 
@@ -49,7 +48,6 @@ namespace PT.Rooftop
         {
             if (_isFollowing)
             {
-                _splinePositioner.SetPercent(_percentage);
                 Vector3 targetP = _splinePositioner.transform.position;
 
                 if(!_thirdStage)
@@ -65,14 +63,14 @@ namespace PT.Rooftop
 
         private void BeforeDelay()
         {
-            _tweener = DOTween.To(() => _percentage, (x) => { _percentage = x; }, 0.4f, _reachTime).OnComplete(() => {
+            _tweener = DOTween.To(() => _splinePositioner.Position, (x) => { _splinePositioner.Position = x; }, 0.4f, _reachTime).OnComplete(() => {
                 Delay();
             });
         }
 
         private void Delay()
         {
-            _tweener = DOTween.To(() => _percentage, (x) => { _percentage = x; }, 0.6f, _delayTime).OnComplete(() => {
+            _tweener = DOTween.To(() => _splinePositioner.Position, (x) => { _splinePositioner.Position = x; }, 0.6f, _delayTime).OnComplete(() => {
                 AfterDelay();
             });
         }
@@ -80,7 +78,7 @@ namespace PT.Rooftop
         private void AfterDelay()
         {
             _thirdStage = true;
-            _tweener = DOTween.To(() => _percentage, (x) => { _percentage = x; }, 1f, _tillStopTime).OnComplete(() =>
+            _tweener = DOTween.To(() => _splinePositioner.Position, (x) => { _splinePositioner.Position = x; }, 1f, _tillStopTime).OnComplete(() =>
             {
                 Destroy(gameObject);
             });

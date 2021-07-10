@@ -29,7 +29,7 @@ namespace PT.GunPlay
 
         #region privates
         [SerializeField] private bool _isTesting;
-        [SerializeField] private GameObject _impactPrefab;
+        [SerializeField] private GameObject _impactPrefab, _splashPrefab;
 
         [SerializeField] private Transform _goal;
         private bool _isFollowing;
@@ -44,7 +44,7 @@ namespace PT.GunPlay
 
         private void Update()
         {
-            if (_isFollowing)
+            if (_isFollowing && _goal != null)
             {
                 Vector3 goalPos = _goal.position;
                 Vector3 direction = (goalPos - transform.position).normalized;
@@ -56,7 +56,24 @@ namespace PT.GunPlay
 
         private void OnCollisionEnter(Collision collision)
         {
+            switch (collision.gameObject.layer)
+            {
+                case 6:
+                case 11: SplashBlowUp(); break;
+                default: DefaultBlowUp(); break;
+            }
+        }
+
+        private void DefaultBlowUp()
+        {
             GameObject go = Instantiate(_impactPrefab);
+            go.transform.position = transform.position;
+            Destroy(gameObject);
+        }
+
+        private void SplashBlowUp()
+        {
+            GameObject go = Instantiate(_splashPrefab);
             go.transform.position = transform.position;
             Destroy(gameObject);
         }

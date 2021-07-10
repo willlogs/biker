@@ -35,6 +35,7 @@ namespace PT.AI
         {
             _baseHealth = _health;
             StartMoving();
+            _gun.gameObject.SetActive(false);
 
             if (!_aiming)
             {
@@ -78,12 +79,12 @@ namespace PT.AI
             _mainCollider.enabled = false;
             _rotationTweener.Kill();
             _currTweener.Kill();
-            _gun.transform.parent = null;
             _aimIK.enabled = false;
-            _hipsRB.velocity = Vector3.forward * 400 + Vector3.up * 50;
+            _hipsRB.AddForce(Vector3.forward * 20000, ForceMode.Acceleration);
 
             OnDeath?.Invoke();
 
+            Destroy(_gun.gameObject);
             Destroy(_animator);
             Destroy(_rb);
             Destroy(gameObject, 5);
@@ -112,6 +113,7 @@ namespace PT.AI
         {
             if(other.gameObject.layer == 8)
             {
+                _gun.gameObject.SetActive(true);
                 _aiming = true;
                 _targetT = other.transform;
                 _animator.SetBool("Walk", false);
@@ -127,6 +129,7 @@ namespace PT.AI
         {
             if (other.gameObject.layer == 8)
             {
+                _gun.gameObject.SetActive(false);
                 _aiming = false;
                 _animator.SetBool("Aim", false);
                 _aimIK.enabled = false;

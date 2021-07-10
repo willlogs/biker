@@ -13,6 +13,7 @@ namespace PT.Rooftop
         [SerializeField] private Transform[] _trace;
         [SerializeField] private float _slowMoFactor;
         [SerializeField] private bool _traceFollower = true;
+        [SerializeField] private Transform _target;
 
         private bool _isIn = false;
         private int _count;
@@ -66,7 +67,7 @@ namespace PT.Rooftop
                 {
                     _isIn = true;
 
-                    pbc.ActivateShootingMode();
+                    pbc.ActivateShootingMode(_target);
 
                     if(_traceFollower)
                         pbc.traceFollower.FollowTrace(_trace);

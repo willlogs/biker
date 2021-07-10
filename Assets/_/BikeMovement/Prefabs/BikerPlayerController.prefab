@@ -121,7 +121,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1189186935}
   - component: {fileID: 1189186936}
-  - component: {fileID: 7369668025681724597}
+  - component: {fileID: 526357779537586952}
   m_Layer: 8
   m_Name: SplineFollower
   m_TagString: Untagged
@@ -159,7 +159,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &7369668025681724597
+--- !u!114 &526357779537586952
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -168,100 +168,48 @@ MonoBehaviour:
   m_GameObject: {fileID: 1189186934}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0def5156137c6d14082064fa7b5d5247, type: 3}
+  m_Script: {fileID: 11500000, guid: dacc8a2ff207fca49bdaf5d45a943d80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  updateMethod: 0
-  _spline: {fileID: 0}
-  _autoUpdate: 1
-  _rotationModifier:
-    blend: 1
-    keys: []
-  _offsetModifier:
-    blend: 1
-    keys: []
-  _colorModifier:
-    blend: 1
-    keys: []
-  _sizeModifier:
-    blend: 1
-    keys: []
-  sampleCollection:
-    samples: []
-    optimizedIndices: 
-    sampleMode: 0
-    clipFrom: 0
-    clipTo: 1
-    loopSamples: 0
-  clipFromSample:
-    position: {x: 0, y: 0, z: 0}
-    up: {x: 0, y: 1, z: 0}
-    forward: {x: 0, y: 0, z: 1}
-    color: {r: 1, g: 1, b: 1, a: 1}
-    size: 1
-    percent: 0
-  clipToSample:
-    position: {x: 0, y: 0, z: 0}
-    up: {x: 0, y: 1, z: 0}
-    forward: {x: 0, y: 0, z: 1}
-    color: {r: 1, g: 1, b: 1, a: 1}
-    size: 1
-    percent: 0
-  _loopSamples: 0
-  _clipFrom: 0
-  _clipTo: 1
-  animClipFrom: 0
-  animClipTo: 1
-  _sampleCount: 0
-  startSampleIndex: 0
-  multithreaded: 0
-  buildOnAwake: 0
-  buildOnEnable: 0
-  _isUpdated: 1
-  applyDirectionRotation: 1
-  useTriggers: 0
-  triggerGroup: 0
-  _direction: 1
-  _physicsMode: 0
-  _motion:
-    _hasOffset: 0
-    _hasRotationOffset: 0
-    _offset: {x: 0, y: 0}
-    _rotationOffset: {x: 0, y: 0, z: 0}
-    _baseScale: {x: 1, y: 1, z: 1}
-    velocityHandleMode: 0
-    applyPositionX: 1
-    applyPositionY: 1
-    applyPositionZ: 1
-    direction: 1
-    applyRotationX: 1
-    applyRotationY: 1
-    applyRotationZ: 1
-    applyScaleX: 0
-    applyScaleY: 0
-    applyScaleZ: 0
-    targetUser: {fileID: 0}
-  targetRigidbody: {fileID: 0}
-  targetRigidbody2D: {fileID: 0}
-  targetTransform: {fileID: 1189186935}
-  _result:
-    position: {x: 0, y: 0, z: 0}
-    up: {x: 0, y: 1, z: 0}
-    forward: {x: 0, y: 0, z: 1}
-    color: {r: 1, g: 1, b: 1, a: 1}
-    size: 1
-    percent: 0
-  _finalResult:
-    position: {x: 0, y: 0, z: 0}
-    up: {x: 0, y: 1, z: 0}
-    forward: {x: 0, y: 0, z: 1}
-    color: {r: 1, g: 1, b: 1, a: 1}
-    size: 1
-    percent: 0
-  _targetObject: {fileID: 0}
-  _position: 0
-  animPosition: 0
-  _mode: 0
+  m_Version: 
+  UpdateIn: 0
+  m_PositionMode: 0
+  m_Position: 0
+  m_MoveMode: 1
+  m_Speed: 0
+  m_Direction: 0
+  m_Clamping: 1
+  m_PlayAutomatically: 1
+  m_OrientationMode: 1
+  m_LockRotation: 1
+  m_OrientationAxis: 0
+  m_IgnoreDirection: 0
+  m_DampingDirection: 0
+  m_DampingUp: 0
+  m_OffsetAngle: 0
+  m_OffsetRadius: 0
+  m_OffsetCompensation: 1
+  onInitialized:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ForceFrequentUpdates: 0
+  m_Spline: {fileID: 0}
+  m_UseCache: 0
+  connectionBehavior: 0
+  allowDirectionChange: 1
+  rejectCurrentSpline: 1
+  rejectTooDivergentSplines: 0
+  maxAllowedDivergenceAngle: 90
+  connectionCustomSelector: {fileID: 0}
+  m_OnControlPointReached:
+    m_PersistentCalls:
+      m_Calls: []
+  m_OnEndReached:
+    m_PersistentCalls:
+      m_Calls: []
+  m_OnSwitch:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1387585118555971985
 GameObject:
   m_ObjectHideFlags: 0
@@ -346,12 +294,52 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1844256247661862615}
   m_LocalRotation: {x: -0.48824012, y: -0.46720308, z: 0.5303152, w: 0.5119655}
-  m_LocalPosition: {x: 0.3362, y: 0.1798, z: 0.1001}
+  m_LocalPosition: {x: 0.336, y: 0.135, z: 0.102}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7008786149586203889}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: -0.252, y: -85.027, z: 92.248}
+--- !u!114 &6837806828969209815
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1844256248423176026}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5013856973b27429d937d256dc082f2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fixTransforms: 1
+  solver:
+    IKPosition: {x: 6.301925, y: 108.35865, z: 21.668667}
+    IKPositionWeight: 1
+    root: {fileID: 1844256248423175975}
+    target: {fileID: 4305645067155986248}
+    tolerance: 0
+    maxIterations: 4
+    useRotationLimits: 1
+    XY: 0
+    bones:
+    - transform: {fileID: 1844256248423175975}
+      weight: 1
+      solverPosition: {x: 0, y: 0, z: 0}
+      solverRotation: {x: 0, y: 0, z: 0, w: 0}
+      defaultLocalPosition: {x: -0.001, y: 1.792, z: -0.449}
+      defaultLocalRotation: {x: 0.14247347, y: 0, z: 0, w: 0.98979867}
+      length: 0
+      sqrMag: 0
+      axis: {x: 0, y: 0, z: 0}
+    transform: {fileID: 1844256248423175975}
+    axis: {x: 0, y: 0, z: 1}
+    poleAxis: {x: 0, y: 1, z: 0}
+    polePosition: {x: 6.2885065, y: 111.83338, z: 19.234322}
+    poleWeight: 0
+    poleTarget: {fileID: 0}
+    clampWeight: 0.1
+    clampSmoothing: 2
 --- !u!1 &1844256248443208053
 GameObject:
   m_ObjectHideFlags: 0
@@ -376,7 +364,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1844256248443208053}
   m_LocalRotation: {x: 0.46878406, y: 0.520567, z: 0.48480713, w: 0.52365416}
-  m_LocalPosition: {x: -0.3199946, y: 0.17999573, z: 0.105012834}
+  m_LocalPosition: {x: -0.33, y: 0.088, z: 0.113}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7008786149586203889}
@@ -556,7 +544,7 @@ Transform:
   m_GameObject: {fileID: 4095747617219342086}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.80077, y: 1, z: 1}
+  m_LocalScale: {x: 0.69384927, y: 1.0527, z: 0.884215}
   m_Children:
   - {fileID: 7008786149586203875}
   m_Father: {fileID: 8718700555740139405}
@@ -618,7 +606,7 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 100
   m_Drag: 0
-  m_AngularDrag: 1
+  m_AngularDrag: 2
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -650,7 +638,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4de98465efb55ef4ea610d35ea6c2b5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  splineFollower: {fileID: 7369668025681724597}
+  splineFollower: {fileID: 526357779537586952}
   _steeringWheelT: {fileID: 1382972296288485085}
   _bikeBaseT: {fileID: 4767750404437399278}
   _centerOfMass: {fileID: 688662762}
@@ -659,7 +647,7 @@ MonoBehaviour:
   _maxSpeed: 20
   _maxAngleDiff: 35
   _rotationSpeed: 3
-  _mdRotationSpeed: 25
+  _mdRotationSpeed: 100
   _acc: 1
   _splineDuration: 7
   _angularVelocityAgeFactor: 0.97
@@ -670,6 +658,48 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   _grounded: 0
+  _mdRotationCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 3.417588
+      outSlope: 3.417588
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.053683516
+    - serializedVersion: 3
+      time: 0.05925465
+      value: 0.6172642
+      inSlope: 2.996149
+      outSlope: 2.996149
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.25495952
+      value: 0.92631626
+      inSlope: 0.2938163
+      outSlope: 0.2938163
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.09277841
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0.038841065
+      outSlope: 0.038841065
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.15398109
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!114 &2615529206186151389
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -686,8 +716,9 @@ MonoBehaviour:
   _isInShootingMode: 0
   _testMode: 0
   _ik: {fileID: 1844256248053600211}
-  _aimIK: {fileID: 0}
-  _gunAimTargetT: {fileID: 0}
+  _aimIK: {fileID: 3924498159004777654}
+  _cameraIK: {fileID: 6837806828969209815}
+  _gunAimTargetT: {fileID: 4305645067155986248}
   _gun: {fileID: 1753399360097541198}
   _switchEach: 10
 --- !u!136 &372485776
@@ -3484,6 +3515,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 409d078b02ba4ce47a7daa69cb2d5562, type: 3}
+--- !u!1 &1844256248423176026 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2614790081547407635, guid: 409d078b02ba4ce47a7daa69cb2d5562, type: 3}
+  m_PrefabInstance: {fileID: 4454487676377613897}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1844256248423175975 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2614790081547407726, guid: 409d078b02ba4ce47a7daa69cb2d5562, type: 3}
@@ -3614,6 +3650,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d15165dd1884aba44b21f14ac1f6a796, type: 3}
+--- !u!4 &3854397135326054022 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7308943474995159162, guid: d15165dd1884aba44b21f14ac1f6a796, type: 3}
+  m_PrefabInstance: {fileID: 5769960600018511612}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1753399360097541198 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5207946732169116338, guid: d15165dd1884aba44b21f14ac1f6a796, type: 3}
@@ -3625,11 +3666,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9464bb5454c8eb240a593424083767b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &3854397135326054022 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7308943474995159162, guid: d15165dd1884aba44b21f14ac1f6a796, type: 3}
-  m_PrefabInstance: {fileID: 5769960600018511612}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &258890960300484012 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6018154271703253840, guid: d15165dd1884aba44b21f14ac1f6a796, type: 3}
