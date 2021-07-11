@@ -14,7 +14,16 @@ namespace PT.Bike
         #region publics
         public TraceFollower traceFollower;
 
-        public void ActivateShootingMode(Transform target = null)
+        public void FollowTarget(Transform target)
+        {
+            _followingTarget = true;
+            _target = new GameObject().transform;
+            _target.position = transform.position;
+            _target.rotation = transform.rotation;
+            _target.parent = target;
+        }
+
+        public void ActivateShootingMode(Transform target = null, bool lookAtIt = false)
         {
             if(target != null)
             {
@@ -25,14 +34,19 @@ namespace PT.Bike
                 _gunAimTargetT.DOMove(transform.position + transform.forward * 10 + transform.up * 5, 0.5f).SetUpdate(true);
             }
 
-            _cameraIK.enabled = true;
+            /*_cameraIK.enabled = true;
             _cameraIK.solver.IKPositionWeight = 0;
-            DOTween.To(() => _cameraIK.solver.IKPositionWeight, (x) => { _cameraIK.solver.IKPositionWeight = x; }, 0.3f, 0.5f).SetUpdate(true);
+            DOTween.To(() => _cameraIK.solver.IKPositionWeight, (x) => { _cameraIK.solver.IKPositionWeight = x; }, 1f, 0.5f).SetUpdate(true);*/
 
             _gun.gameObject.SetActive(true);
             _ik.solver.rightHandEffector.positionWeight = 0;
             _ik.solver.rightHandEffector.rotationWeight = 0;
             _isInShootingMode = true;
+
+            if (lookAtIt)
+            {
+                Camera.main.transform.forward = (target.position - Camera.main.transform.position).normalized;
+            }
         }
 
         public void DeactivateShootingMode()
@@ -43,6 +57,8 @@ namespace PT.Bike
             _ik.solver.rightHandEffector.positionWeight = 1;
             _ik.solver.rightHandEffector.rotationWeight = 1;
             _isInShootingMode = false;
+
+            _followingTarget = false;
         }
         #endregion
 
@@ -59,6 +75,9 @@ namespace PT.Bike
         private TouchInputManager _inputManager;
         private BikeController _bikeController;
         private GunController _gunController;
+
+        private bool _followingTarget = false;
+        private Transform _target;
 
         private void Start()
         {
@@ -80,10 +99,16 @@ namespace PT.Bike
             if (_isInShootingMode)
             {
                 _gunController.ApplyMovement(_inputManager.diff, _inputManager.hasInput);
+
+                if (_followingTarget)
+                {
+                    transform.position = _target.position;
+                    transform.rotation = _target.rotation;
+                }
             }
             else
-            {
-                _bikeController.Steer(_inputManager.diff, _inputManager.hasInput);                
+            {                
+                _bikeController.Steer(_inputManager.diff, _inputManager.hasInput);
             }
         }
 
