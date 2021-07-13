@@ -12,7 +12,7 @@ namespace PT.GunPlay
         Ray r;
         public void ApplyMovement(Vector3 diff, bool hasInput)
         {
-            if(diff.magnitude > 0)
+            if (diff.magnitude > 0)
             {
                 /*Vector3 trueDiff = new Vector3(-diff.y, diff.x);*/
                 /*_gunAimingTarget.RotateAround(Camera.main.transform.position, trueDiff.normalized, diff.magnitude * Time.unscaledDeltaTime * _targetMovementSpeed);*/
@@ -33,8 +33,14 @@ namespace PT.GunPlay
                 Vector2 sp = _aimUI.anchoredPosition + Vector2.up * halfHeight + Vector2.right * halfWidth;
                 r = Camera.main.ScreenPointToRay(sp);
                 RaycastHit info;
-                Physics.Raycast(r, out info, 50, aimLayerMask);
-                _gunAimingTarget.position = r.origin + r.direction * 10;
+                if (Physics.Raycast(r, out info, 50, aimLayerMask))
+                {
+                    _gunAimingTarget.position = info.point;
+                }
+                else
+                {
+                    _gunAimingTarget.position = r.origin + r.direction * 10;
+                }
             }
 
             if (hasInput)

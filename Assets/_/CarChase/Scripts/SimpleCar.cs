@@ -45,11 +45,7 @@ namespace PT.CarChase
 
                 _offsetKeeper.parent = _splineFollowerT;
             }
-        }
-
-        private void FixedUpdate()
-        {
-            if (hasOffset)
+            else
             {
                 transform.forward = _offsetKeeper.forward;
                 float magDiff = (_splineFollowerT.position - transform.position).magnitude;
@@ -62,6 +58,14 @@ namespace PT.CarChase
                 {
                     transform.position = _offsetKeeper.position;
                 }
+            }
+        }
+
+        private void FixedUpdate()
+        {
+            if (hasOffset)
+            {
+                
             }
         }
     }

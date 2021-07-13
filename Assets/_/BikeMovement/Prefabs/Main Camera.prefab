@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 2614790081547407633}
   - component: {fileID: 2614790081547407632}
   - component: {fileID: 2370720373899024583}
+  - component: {fileID: 8690334867478526698}
+  - component: {fileID: 6668124668526503092}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -96,3 +98,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6715ae9046a02c642aee40050562b02d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8690334867478526698
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2614790081547407635}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61d30c51d6e8f479e9a211b3aba23641, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bloomColor: {r: 1, g: 1, b: 1, a: 1}
+  threshold: 0.927
+  intensity: 0.253
+  resolution: 1
+  blurIterations: 1
+  material: {fileID: 2100000, guid: 050512b117c564ce78f612046b53b2d1, type: 2}
+--- !u!114 &6668124668526503092
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2614790081547407635}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7d75a7a1e2fb401bb98f2bd9723a119, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  blendMode: 0
+  blendIntensity: 0
+  vignetteIntensity: 0
+  vignetteMaxValue: 0.2
+  gradientTexture: {fileID: 0}
+  material: {fileID: 2100000, guid: 22b440eb0cb3745a8ab862bf24878003, type: 2}

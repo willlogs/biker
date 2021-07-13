@@ -17,6 +17,7 @@ namespace PT.Bike
 
         public void FollowTarget(Transform target)
         {
+            GetComponent<Rigidbody>().isKinematic = true;
             GetComponent<Rigidbody>().velocity = Vector3.zero;
             _followingTarget = true;
             _target = new GameObject().transform;

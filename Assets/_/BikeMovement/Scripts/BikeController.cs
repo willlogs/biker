@@ -16,9 +16,9 @@ namespace PT.Bike
         {
             if (_canControl && _grounded)
             {
-                Quaternion before = transform.rotation;
-                before = new Quaternion(0, diff.x, 0, 1) * before;
-                transform.rotation = Quaternion.Lerp(transform.rotation, before, Time.fixedDeltaTime * _mdRotationSpeed);
+                Quaternion newRot = transform.rotation;
+                newRot = new Quaternion(0, diff.x * 4, 0, 1) * newRot;
+                transform.rotation = Quaternion.Lerp(transform.rotation, newRot, Time.fixedDeltaTime * _mdRotationSpeed);
 
                 float rotationMultiplier = _mdRotationCurve.Evaluate(Mathf.Abs(diff.x));
                 _steeringWheelT.localRotation = Quaternion.Lerp(
@@ -91,7 +91,7 @@ namespace PT.Bike
         public void Crash(Vector3 point)
         {
             Vector3 impactDir = point - transform.position;
-            impactDir = impactDir.normalized;
+            impactDir = _cameraT.forward;
 
             foreach(MonoBehaviour obj in _ikSolvers)
             {
@@ -114,7 +114,7 @@ namespace PT.Bike
                 Random.Range(-1f, 1f)
             ).normalized * 10;
             _rb.velocity = impactDir * 10 + Vector3.up * 10;
-            _ragdollBaseRB.velocity = _rb.velocity * 10;
+            _ragdollBaseRB.velocity = _rb.velocity * 3;
 
             _cameraT.parent = null;
             _cameraT.DOMove(point + Vector3.up * 3 + Vector3.forward * -3, 1f);

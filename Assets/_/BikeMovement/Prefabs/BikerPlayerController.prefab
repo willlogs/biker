@@ -854,7 +854,7 @@ MonoBehaviour:
   _maxSpeed: 20
   _maxAngleDiff: 35
   _rotationSpeed: 3
-  _mdRotationSpeed: 20
+  _mdRotationSpeed: 10
   _acc: 1
   _splineDuration: 7
   _angularVelocityAgeFactor: 0.97
@@ -879,8 +879,8 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0.053683516
     - serializedVersion: 3
-      time: 0.05925465
-      value: 0.6172642
+      time: 0.023816112
+      value: 0.65072674
       inSlope: 2.996149
       outSlope: 2.996149
       tangentMode: 0
@@ -994,12 +994,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   aimLayerMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 15615
   _aimUI: {fileID: 696878338}
   _isInGunPlayMode: 0
   _gunAimingTarget: {fileID: 4305645067155986248}
   _aimPivotT: {fileID: 6852289619901136847}
-  _targetMovementSpeed: 10000
+  _targetMovementSpeed: 50000
   _gun: {fileID: 1753399360097541198}
 --- !u!65 &4243741049013710159
 BoxCollider:
@@ -4100,6 +4100,22 @@ PrefabInstance:
     - target: {fileID: 2614790081547407726, guid: 409d078b02ba4ce47a7daa69cb2d5562, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6668124668526503092, guid: 409d078b02ba4ce47a7daa69cb2d5562, type: 3}
+      propertyPath: blendMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6668124668526503092, guid: 409d078b02ba4ce47a7daa69cb2d5562, type: 3}
+      propertyPath: blendIntensity
+      value: 0.336
+      objectReference: {fileID: 0}
+    - target: {fileID: 6668124668526503092, guid: 409d078b02ba4ce47a7daa69cb2d5562, type: 3}
+      propertyPath: gradientTexture
+      value: 
+      objectReference: {fileID: 2800000, guid: c3323d8a6395d43d883c6c47a4e924d1, type: 3}
+    - target: {fileID: 8690334867478526698, guid: 409d078b02ba4ce47a7daa69cb2d5562, type: 3}
+      propertyPath: intensity
+      value: 0.069
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 409d078b02ba4ce47a7daa69cb2d5562, type: 3}
