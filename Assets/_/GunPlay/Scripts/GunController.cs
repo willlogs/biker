@@ -22,7 +22,7 @@ namespace PT.GunPlay
                 Quaternion targetRotation = new Quaternion(trueDiff.x * _speedfactor, trueDiff.y * _speedfactor, 0, 1) * _aimPivotT.rotation;
                 _aimPivotT.rotation = Quaternion.Lerp(_aimPivotT.rotation, targetRotation, Time.unscaledDeltaTime * 5f);*/
 
-                Vector2 change = (Vector2)(diff * Time.unscaledDeltaTime * _targetMovementSpeed);
+                Vector2 change = (Vector2)(diff * Time.fixedDeltaTime * _targetMovementSpeed);
                 _aimUI.anchoredPosition += change;
 
                 _aimUI.anchoredPosition = new Vector2(

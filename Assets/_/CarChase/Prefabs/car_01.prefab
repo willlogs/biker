@@ -24,8 +24,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 986389631}
-  m_LocalRotation: {x: -0, y: -0.99979806, z: -0, w: 0.020096736}
-  m_LocalPosition: {x: -0.92314047, y: 0.020070782, z: 0.6123955}
+  m_LocalRotation: {x: -0, y: -0.99984807, z: -0, w: 0.017433375}
+  m_LocalPosition: {x: -0.9000172, y: 0.020070782, z: 1.2358866}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8485737279304930620}
@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 4184416407783627523}
   - component: {fileID: 482777289893931908}
   - component: {fileID: 6498481761445925913}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: car_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -192,6 +192,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccda2634abaa3994aadedd0f54308523, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _animator: {fileID: 0}
   _splineController: {fileID: 986389633}
   _splineFollowerT: {fileID: 986389632}
   _followSpeed: 5

@@ -16,6 +16,7 @@ namespace PT.Bike
 
         public void FollowTarget(Transform target)
         {
+            GetComponent<Rigidbody>().velocity = Vector3.zero;
             _followingTarget = true;
             _target = new GameObject().transform;
             _target.position = transform.position;
@@ -94,7 +95,7 @@ namespace PT.Bike
                 StartCoroutine(SwitchModes());
         }
 
-        private void Update()
+        private void FixedUpdate()
         {
             if (_isInShootingMode)
             {

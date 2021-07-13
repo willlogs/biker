@@ -17,7 +17,7 @@ namespace PT.Bike
             {
                 Quaternion before = transform.rotation;
                 before = new Quaternion(0, diff.x, 0, 1) * before;
-                transform.rotation = Quaternion.Lerp(transform.rotation, before, Time.deltaTime * _mdRotationSpeed);
+                transform.rotation = Quaternion.Lerp(transform.rotation, before, Time.fixedDeltaTime * _mdRotationSpeed);
 
                 float rotationMultiplier = _mdRotationCurve.Evaluate(Mathf.Abs(diff.x));
                 _steeringWheelT.localRotation = Quaternion.Lerp(
@@ -27,7 +27,7 @@ namespace PT.Bike
                             _maxAngleDiff * rotationMultiplier * Mathf.Sign(diff.x),
                             _steeringWheelT.localRotation.z
                         ),
-                        Time.deltaTime * _rotationSpeed
+                        Time.fixedDeltaTime * _rotationSpeed
                 );
 
                 if (hasInput)
