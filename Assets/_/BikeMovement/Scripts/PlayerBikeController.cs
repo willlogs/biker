@@ -4,6 +4,7 @@ using UnityEngine;
 using PT.GunPlay;
 using RootMotion.FinalIK;
 using DG.Tweening;
+using UnityEngine.UI;
 
 namespace PT.Bike
 {
@@ -44,6 +45,8 @@ namespace PT.Bike
             _ik.solver.rightHandEffector.rotationWeight = 0;
             _isInShootingMode = true;
 
+            _aimUI.gameObject.SetActive(true);
+
             if (lookAtIt)
             {
                 Camera.main.transform.forward = (target.position - Camera.main.transform.position).normalized;
@@ -59,6 +62,8 @@ namespace PT.Bike
             _ik.solver.rightHandEffector.rotationWeight = 1;
             _isInShootingMode = false;
 
+            _aimUI.gameObject.SetActive(false);
+
             _followingTarget = false;
         }
         #endregion
@@ -70,6 +75,7 @@ namespace PT.Bike
         [SerializeField] private AimIK _aimIK, _cameraIK;
         [SerializeField] private Transform _gunAimTargetT;
         [SerializeField] private Gun _gun;
+        [SerializeField] private Image _aimUI;
 
         [SerializeField] private float _switchEach = 10f;
 

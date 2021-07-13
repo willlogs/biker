@@ -1,5 +1,6 @@
 using DG.Tweening;
 using FluffyUnderware.Curvy.Controllers;
+using PT.AI;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -87,6 +88,41 @@ namespace PT.Bike
             _positionTween.Kill();
         }
 
+        public void Crash(Vector3 point)
+        {
+            Vector3 impactDir = point - transform.position;
+            impactDir = impactDir.normalized;
+
+            foreach(MonoBehaviour obj in _ikSolvers)
+            {
+                obj.enabled = false;
+            }
+
+            foreach(Collider c in _helperColliders)
+            {
+                c.enabled = false;
+            }
+
+            _playerPolyT.parent = null;
+            _characterRagdoll.transform.parent = null;
+            _characterRagdoll.Activate();
+
+            _rb.angularDrag = 0;
+            _rb.angularVelocity = new Vector3(
+                Random.Range(-1f, 1f),
+                Random.Range(-1f, 1f),
+                Random.Range(-1f, 1f)
+            ).normalized * 10;
+            _rb.velocity = impactDir * 10 + Vector3.up * 10;
+            _ragdollBaseRB.velocity = _rb.velocity * 10;
+
+            _cameraT.parent = null;
+            _cameraT.DOMove(point + Vector3.up * 3 + Vector3.forward * -3, 1f);
+
+            Destroy(gameObject.GetComponent<PlayerBikeController>());
+            Destroy(this);
+        }
+
         #endregion
 
 
@@ -94,11 +130,16 @@ namespace PT.Bike
 
         [SerializeField] private Transform _steeringWheelT, _bikeBaseT, _centerOfMass, _splineFollowerT, _groundRayStartT;
         [SerializeField] private float _maxSpeed, _maxAngleDiff = 35, _rotationSpeed, _mdRotationSpeed = 20, _acc, _splineDuration = 5, _angularVelocityAgeFactor = 0.1f;
-        [SerializeField] private Rigidbody _rb, _followerRB;
+        [SerializeField] private Rigidbody _rb, _followerRB, _ragdollBaseRB;
         [SerializeField] private Animator _animator;
         [SerializeField] private LayerMask _groundDetectorMask;
         [SerializeField] private bool _grounded = false;
         [SerializeField] private AnimationCurve _mdRotationCurve;
+
+        [SerializeField] private Transform _playerPolyT, _cameraT;
+        [SerializeField] private RagdollManager _characterRagdoll;
+        [SerializeField] private MonoBehaviour[] _ikSolvers;
+        [SerializeField] private Collider[] _helperColliders;
 
         private bool _canControl = true, _followingSpline;
         private Tweener _positionTween;
@@ -151,6 +192,14 @@ namespace PT.Bike
             }            
 
             _rb.angularVelocity = new Vector3(_rb.angularVelocity.x, _rb.angularVelocity.y, _rb.angularVelocity.z - _zQAngularVelocity);
+        }
+
+        private void OnCollisionEnter(Collision collision)
+        {
+            if(collision.gameObject.layer == 12)
+            {
+                Crash(collision.GetContact(0).point);
+            }
         }
 
         #endregion
