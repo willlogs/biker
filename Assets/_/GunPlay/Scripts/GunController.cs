@@ -14,14 +14,6 @@ namespace PT.GunPlay
         {
             if (diff.magnitude > 0)
             {
-                /*Vector3 trueDiff = new Vector3(-diff.y, diff.x);*/
-                /*_gunAimingTarget.RotateAround(Camera.main.transform.position, trueDiff.normalized, diff.magnitude * Time.unscaledDeltaTime * _targetMovementSpeed);*/
-                /*_gunAimingTarget.Translate((Camera.main.transform.up * diff.y + Camera.main.transform.right * diff.x) * Time.unscaledDeltaTime * _targetMovementSpeed);*/
-
-                /*float _speedfactor = Time.unscaledDeltaTime * _targetMovementSpeed;
-                Quaternion targetRotation = new Quaternion(trueDiff.x * _speedfactor, trueDiff.y * _speedfactor, 0, 1) * _aimPivotT.rotation;
-                _aimPivotT.rotation = Quaternion.Lerp(_aimPivotT.rotation, targetRotation, Time.unscaledDeltaTime * 5f);*/
-
                 Vector2 change = (Vector2)(diff * Time.fixedDeltaTime * _targetMovementSpeed);
                 _aimUI.anchoredPosition += change;
 
@@ -33,7 +25,8 @@ namespace PT.GunPlay
                 Vector2 sp = _aimUI.anchoredPosition + Vector2.up * halfHeight + Vector2.right * halfWidth;
                 r = Camera.main.ScreenPointToRay(sp);
                 RaycastHit info;
-                if (Physics.Raycast(r, out info, 50, aimLayerMask))
+
+                if (Physics.Raycast(r, out info, 50, aimLayerMask, QueryTriggerInteraction.Ignore))
                 {
                     _gunAimingTarget.position = info.point;
                 }

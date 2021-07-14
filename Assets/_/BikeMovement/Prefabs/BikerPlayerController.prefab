@@ -994,7 +994,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   aimLayerMask:
     serializedVersion: 2
-    m_Bits: 15615
+    m_Bits: 14591
   _aimUI: {fileID: 696878338}
   _isInGunPlayMode: 0
   _gunAimingTarget: {fileID: 4305645067155986248}
@@ -4175,6 +4175,10 @@ PrefabInstance:
     - target: {fileID: 5207946732169116338, guid: d15165dd1884aba44b21f14ac1f6a796, type: 3}
       propertyPath: _coolDownTime
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5207946732169116338, guid: d15165dd1884aba44b21f14ac1f6a796, type: 3}
+      propertyPath: layerMask.m_Bits
+      value: 14591
       objectReference: {fileID: 0}
     - target: {fileID: 6018154271703253840, guid: d15165dd1884aba44b21f14ac1f6a796, type: 3}
       propertyPath: m_RootOrder

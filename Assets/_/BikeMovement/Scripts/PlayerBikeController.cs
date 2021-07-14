@@ -15,6 +15,12 @@ namespace PT.Bike
         #region publics
         public TraceFollower traceFollower;
 
+        public void StopEverything()
+        {
+            GetComponent<Rigidbody>().isKinematic = true;
+            GetComponent<Rigidbody>().velocity = Vector3.zero;
+        }
+
         public void FollowTarget(Transform target)
         {
             GetComponent<Rigidbody>().isKinematic = true;

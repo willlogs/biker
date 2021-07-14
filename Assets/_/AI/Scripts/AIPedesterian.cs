@@ -31,6 +31,8 @@ namespace PT.AI
         private int _wpIndex = 0;
         private float _baseHealth;
 
+        private Vector3 _lastCollisionNormal;
+
         private void Start()
         {
             _baseHealth = _health;
@@ -80,7 +82,8 @@ namespace PT.AI
             _rotationTweener.Kill();
             _currTweener.Kill();
             _aimIK.enabled = false;
-            _hipsRB.AddForce(Vector3.forward * 20000, ForceMode.Acceleration);
+
+            _hipsRB.AddForce(-_lastCollisionNormal * 20000, ForceMode.Acceleration);
 
             OnDeath?.Invoke();
 
@@ -102,6 +105,8 @@ namespace PT.AI
 
         private void OnCollisionEnter(Collision collision)
         {
+            _lastCollisionNormal = collision.GetContact(0).normal;
+
             switch (collision.gameObject.layer)
             {
                 case 9: Hurt(); break;
@@ -113,6 +118,9 @@ namespace PT.AI
         {
             if(other.gameObject.layer == 8)
             {
+                _currTweener.Kill();
+                _rotationTweener.Kill();
+
                 _gun.gameObject.SetActive(true);
                 _aiming = true;
                 _targetT = other.transform;
