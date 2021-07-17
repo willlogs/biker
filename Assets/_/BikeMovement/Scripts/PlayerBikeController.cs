@@ -32,6 +32,14 @@ namespace PT.Bike
             _target.parent = target;
         }
 
+        public void ContinueMoving()
+        {
+            GetComponent<Rigidbody>().isKinematic = false;
+            GetComponent<Rigidbody>().velocity = transform.forward * 10;
+            _followingTarget = false;
+            _bikeController._autoAccelerate = true;
+        }
+
         public void ActivateShootingMode(Transform target = null, bool lookAtIt = false)
         {
             if(target != null)

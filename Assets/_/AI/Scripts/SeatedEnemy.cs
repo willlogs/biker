@@ -16,7 +16,9 @@ namespace PT.AI
                 _health = 0;
                 Die();
             }
-            _slider.SetValue(_health/100);
+
+            if(_slider != null)
+                _slider.SetValue(_health/100);
         }
 
         [SerializeField] private float _health = 100;

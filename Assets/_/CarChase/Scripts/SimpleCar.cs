@@ -13,12 +13,12 @@ namespace PT.CarChase
             DOTween.To(() => _splineController.Speed, (x) => { _splineController.Speed = x; }, 0, duration);
         }
 
-        public void Crash()
+        public virtual void Crash()
         {
             _animator.SetTrigger("Crash");
         }
 
-        [SerializeField] private Animator _animator;
+        [SerializeField] protected Animator _animator;
         [SerializeField] private SplineController _splineController;
         [SerializeField] private Transform _splineFollowerT;
         [SerializeField] private float _followSpeed = 5;

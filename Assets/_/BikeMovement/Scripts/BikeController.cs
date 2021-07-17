@@ -11,6 +11,7 @@ namespace PT.Bike
     {
         #region publics
         public SplineController splineFollower;
+        public bool _autoAccelerate;
 
         public void Steer(Vector3 diff, bool hasInput)
         {
@@ -32,6 +33,11 @@ namespace PT.Bike
                 );
 
                 if (hasInput)
+                {
+                    _autoAccelerate = false;
+                }
+
+                if (hasInput || _autoAccelerate)
                 {
                     Accelerate();
                     AlignVelocity();
