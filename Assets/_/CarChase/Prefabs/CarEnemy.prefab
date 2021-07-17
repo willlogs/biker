@@ -1434,7 +1434,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 63ac1dac8c25fd64aabb42d0c70d366d, type: 2}
+  - {fileID: 2100000, guid: f25953602f11cd241b67ba73883deb63, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1530,7 +1530,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 63ac1dac8c25fd64aabb42d0c70d366d, type: 2}
+  - {fileID: 2100000, guid: f25953602f11cd241b67ba73883deb63, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2009,7 +2009,7 @@ GameObject:
   - component: {fileID: 2910697299657591645}
   - component: {fileID: 2910697299658590621}
   - component: {fileID: 3357326310591758091}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Car1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2057,7 +2057,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 63ac1dac8c25fd64aabb42d0c70d366d, type: 2}
+  - {fileID: 2100000, guid: f25953602f11cd241b67ba73883deb63, type: 2}
   - {fileID: 2100000, guid: cc7b2db259c363947adc3910417f93b8, type: 2}
   - {fileID: 2100000, guid: 795398b93aa6a3b40a0d70f6eed0d3c7, type: 2}
   - {fileID: 2100000, guid: 244cf37b097fc224ba218a8f73bbb9f3, type: 2}
@@ -2191,7 +2191,7 @@ Animator:
   m_GameObject: {fileID: 3357326310906366178}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 4e6b044c5c0190f4eb15fa6906c094c9, type: 2}
+  m_Controller: {fileID: 9100000, guid: 49a630d1a65f21f469d83e675c9f4b96, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -2374,7 +2374,7 @@ LODGroup:
   m_AnimateCrossFading: 0
   m_LastLODIsBillboard: 0
   m_LODs:
-  - screenRelativeHeight: 0.59575623
+  - screenRelativeHeight: 0.0967532
     fadeTransitionWidth: 0
     renderers:
     - renderer: {fileID: 2910697299658590617}
@@ -2389,7 +2389,7 @@ LODGroup:
     - renderer: {fileID: 2910697299658590607}
     - renderer: {fileID: 2910697299658590593}
     - renderer: {fileID: 2910697299658590595}
-  - screenRelativeHeight: 0.30150002
+  - screenRelativeHeight: 0.025014566
     fadeTransitionWidth: 0
     renderers:
     - renderer: {fileID: 1050939856895984559}
@@ -2404,7 +2404,7 @@ LODGroup:
     - renderer: {fileID: 1050939856895984573}
     - renderer: {fileID: 1050939856895984571}
     - renderer: {fileID: 1050939856895984569}
-  - screenRelativeHeight: 0.10625624
+  - screenRelativeHeight: 0
     fadeTransitionWidth: 0
     renderers:
     - renderer: {fileID: 7782901603018748588}
@@ -4762,6 +4762,10 @@ PrefabInstance:
       propertyPath: playOnAwake
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 725748389856807712, guid: 4bda94453d2ca7444a0fff05b2d425f5, type: 3}
+      propertyPath: moveWithTransform
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 725748389856807713, guid: 4bda94453d2ca7444a0fff05b2d425f5, type: 3}
       propertyPath: m_Materials.Array.size
       value: 1
@@ -4822,9 +4826,17 @@ PrefabInstance:
       propertyPath: playOnAwake
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 725748390055121439, guid: 4bda94453d2ca7444a0fff05b2d425f5, type: 3}
+      propertyPath: moveWithTransform
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 725748390129463915, guid: 4bda94453d2ca7444a0fff05b2d425f5, type: 3}
       propertyPath: playOnAwake
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 725748390129463915, guid: 4bda94453d2ca7444a0fff05b2d425f5, type: 3}
+      propertyPath: moveWithTransform
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 725748390129463916, guid: 4bda94453d2ca7444a0fff05b2d425f5, type: 3}
       propertyPath: m_Materials.Array.size

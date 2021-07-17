@@ -17,10 +17,6 @@ namespace PT.Bike
         {
             if (_canControl && _grounded)
             {
-                Quaternion newRot = transform.rotation;
-                newRot = new Quaternion(0, diff.x * 4, 0, 1) * newRot;
-                transform.rotation = Quaternion.Lerp(transform.rotation, newRot, Time.fixedDeltaTime * _mdRotationSpeed);
-
                 float rotationMultiplier = _mdRotationCurve.Evaluate(Mathf.Abs(diff.x));
                 _steeringWheelT.localRotation = Quaternion.Lerp(
                         _steeringWheelT.localRotation,
@@ -31,6 +27,10 @@ namespace PT.Bike
                         ),
                         Time.fixedDeltaTime * _rotationSpeed
                 );
+
+                float newVel = Mathf.Clamp(diff.x * _mdRotationSpeed, -_angularVelocityCap, _angularVelocityCap);
+                _angularVelocity = _angularVelocity * (1 - _angularInputFactor) + newVel * _angularInputFactor;
+                _rb.angularVelocity = new Vector3(_rb.angularVelocity.x, _angularVelocity * _mdRotationSpeed, _rb.angularVelocity.z);
 
                 if (hasInput)
                 {
@@ -135,7 +135,7 @@ namespace PT.Bike
         #region privates
 
         [SerializeField] private Transform _steeringWheelT, _bikeBaseT, _centerOfMass, _splineFollowerT, _groundRayStartT;
-        [SerializeField] private float _maxSpeed, _maxAngleDiff = 35, _rotationSpeed, _mdRotationSpeed = 20, _acc, _splineDuration = 5, _angularVelocityAgeFactor = 0.1f;
+        [SerializeField] private float _maxSpeed, _maxAngleDiff = 35, _rotationSpeed, _mdRotationSpeed = 20, _acc, _splineDuration = 5, _angularVelocityAgeFactor = 0.1f, _angularVelocityCap = 10f, _angularInputFactor = 0.1f;
         [SerializeField] private Rigidbody _rb, _followerRB, _ragdollBaseRB;
         [SerializeField] private Animator _animator;
         [SerializeField] private LayerMask _groundDetectorMask;
@@ -151,6 +151,7 @@ namespace PT.Bike
         private Tweener _positionTween;
 
         private float _zQAngularVelocity;
+        private float _angularVelocity;
 
         private void Start()
         {

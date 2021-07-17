@@ -47,17 +47,21 @@ namespace PT.CarChase
             }
             else
             {
-                transform.forward = _offsetKeeper.forward;
-                float magDiff = (_splineFollowerT.position - transform.position).magnitude;
+                try
+                {
+                    transform.forward = _offsetKeeper.forward;
+                    float magDiff = (_splineFollowerT.position - transform.position).magnitude;
 
-                if (magDiff < 50f)
-                {
-                    transform.position = Vector3.Lerp(transform.position, _offsetKeeper.position, Time.fixedDeltaTime * _followSpeed);
+                    if (magDiff < 50f)
+                    {
+                        transform.position = Vector3.Lerp(transform.position, _offsetKeeper.position, Time.fixedDeltaTime * _followSpeed);
+                    }
+                    else
+                    {
+                        transform.position = _offsetKeeper.position;
+                    }
                 }
-                else
-                {
-                    transform.position = _offsetKeeper.position;
-                }
+                catch { }
             }
         }
 
