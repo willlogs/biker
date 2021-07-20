@@ -43,7 +43,7 @@ namespace PT.PullUp
 
                 _player.transform.DORotateQuaternion(
                     _beforeRotation,
-                    0.5f
+                    0.2f
                 ).OnComplete(() => {
                     _player.ContinueMoving();
                     _player.DeactivateShootingMode();
@@ -67,7 +67,7 @@ namespace PT.PullUp
                             pbc.transform.forward, 
                             _target.position - pbc.transform.position
                         ) * pbc.transform.rotation,
-                        0.5f
+                        0.2f
                     ).OnComplete(() => {
                         pbc.ActivateShootingMode(_target, true);
                     });

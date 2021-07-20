@@ -41,6 +41,8 @@ namespace PT.Bike
             _bikeController._autoAccelerate = true;
         }
 
+        bool resetCam = false;
+        Quaternion beforeRot;
         public void ActivateShootingMode(Transform target = null, bool lookAtIt = false)
         {
             /*_cameraCopyPosTween.Follow();
@@ -64,14 +66,17 @@ namespace PT.Bike
             _gunController.SetGun(_guns[_gunIndex]);
             _ik.solver.rightHandEffector.positionWeight = 0;
             _ik.solver.rightHandEffector.rotationWeight = 0;
+            _gunPositionerIK.solver.IKPositionWeight = 1;
             _aimIK.solver.IKPositionWeight = 1;
             _aimIK.enabled = true;
             _isInShootingMode = true;
 
             _aimUI.gameObject.SetActive(true);
 
+            resetCam = lookAtIt;
             if (lookAtIt)
             {
+                beforeRot = Camera.main.transform.localRotation;
                 Camera.main.transform.forward = (target.position - Camera.main.transform.position).normalized;
             }
         }
@@ -83,6 +88,11 @@ namespace PT.Bike
             _cameraCopyPosTween.transform.position = _mainViewT.position;
             _cameraCopyPosTween.transform.rotation = _mainViewT.rotation;*/
 
+            if (resetCam)
+            {
+                Camera.main.transform.localRotation = beforeRot;
+            }
+
             DOTween.To(() => _cameraIK.solver.IKPositionWeight, (x) => { _cameraIK.solver.IKPositionWeight = x; }, 0f, 0.5f).SetUpdate(true).OnComplete(() => { _cameraIK.enabled = false; });
 
             foreach(Gun g in _guns)
@@ -92,6 +102,7 @@ namespace PT.Bike
 
             _ik.solver.rightHandEffector.positionWeight = 1;
             _ik.solver.rightHandEffector.rotationWeight = 1;
+            _gunPositionerIK.solver.IKPositionWeight = 0;
 
             _aimIK.solver.IKPositionWeight = 0;
             _aimIK.enabled = false;
@@ -100,6 +111,7 @@ namespace PT.Bike
             _aimUI.gameObject.SetActive(false);
 
             _followingTarget = false;
+            
         }
         #endregion
 
@@ -118,6 +130,8 @@ namespace PT.Bike
 
         [SerializeField] private TweenCopyPosition _cameraCopyPosTween;
         [SerializeField] private Transform _mainViewT;
+
+        [SerializeField] CCDIK _gunPositionerIK;
 
         private TouchInputManager _inputManager;
         private BikeController _bikeController;
