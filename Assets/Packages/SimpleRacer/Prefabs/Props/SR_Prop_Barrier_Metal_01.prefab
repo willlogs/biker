@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 456092}
   - component: {fileID: 3315456}
   - component: {fileID: 2338226}
-  m_Layer: 0
+  - component: {fileID: 651638152697766730}
+  m_Layer: 12
   m_Name: SR_Prop_Barrier_Metal_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -81,3 +82,16 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &651638152697766730
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 194136}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 6.933537, y: 2.296681, z: 0.48268127}
+  m_Center: {x: 3.4587615, y: 0.5806122, z: -0.23348999}

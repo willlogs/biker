@@ -14,8 +14,42 @@ namespace PT.PullUp
         [SerializeField] private Transform[] _trace;
         [SerializeField] private float _slowMoFactor;
 
+        [SerializeField] private AIPedesterian[] _enemies;
+
+        private Quaternion _beforeRotation;
+
         private bool _isIn = false;
         private PlayerBikeController _player;
+
+        private int _count = 0;
+
+        private void Start()
+        {
+            _count = _enemies.Length;
+
+            foreach(AIPedesterian e in _enemies)
+            {
+                e.OnDeath += Reduce;
+            }
+        }
+
+        private void Reduce()
+        {
+            _count--;
+            if(_count <= 0)
+            {
+                // get back to running away
+                TimeManager.Instance.GoNormal(0.5f);
+
+                _player.transform.DORotateQuaternion(
+                    _beforeRotation,
+                    0.5f
+                ).OnComplete(() => {
+                    _player.ContinueMoving();
+                    _player.DeactivateShootingMode();
+                });
+            }
+        }
 
         private void OnTriggerEnter(Collider other)
         {
@@ -27,6 +61,7 @@ namespace PT.PullUp
                     _isIn = true;
 
                     pbc.StopEverything();
+                    _beforeRotation = pbc.transform.rotation;
                     pbc.transform.DORotateQuaternion(
                         Quaternion.FromToRotation(
                             pbc.transform.forward, 

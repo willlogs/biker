@@ -8,8 +8,8 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: PixelColors 5
-  m_Shader: {fileID: 4800000, guid: a6da473b89caeb1409bac856668af764, type: 3}
-  m_ShaderKeywords: TCP2_SPEC_TOON _SMOOTHNESS_TEXTURE_ALBEDO_CHANNEL_A
+  m_Shader: {fileID: 4800000, guid: 3e3093d2c3fb57f4483a13f48685e76c, type: 3}
+  m_ShaderKeywords: OUTLINES TCP2_SPEC_TOON _SMOOTHNESS_TEXTURE_ALBEDO_CHANNEL_A
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -68,26 +68,34 @@ Material:
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
+    - _DstBlendOutline: 10
     - _GlossMapScale: 0.39
     - _Glossiness: 0.742
     - _GlossyReflections: 1
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
+    - _Offset1: 0
+    - _Offset2: 0
+    - _Outline: 1.45
     - _Parallax: 0.02
-    - _RampSmooth: 0.21
-    - _RampThreshold: 0.5
+    - _RampSmooth: 0.01
+    - _RampThreshold: 0.659
     - _Shininess: 0.05
     - _SmoothnessTextureChannel: 1
-    - _SpecSmooth: 1
+    - _SpecSmooth: 0.695
     - _SpecularHighlights: 1
     - _SrcBlend: 1
+    - _SrcBlendOutline: 5
+    - _TexLod: 5
     - _UVSec: 0
+    - _ZSmooth: -0.5
     - _ZWrite: 1
     m_Colors:
     - _Color: {r: 0.5943396, g: 0.1784819, b: 0.1485849, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 0}
     - _HColor: {r: 0.7075472, g: 0.7075472, b: 0.7075472, a: 1}
+    - _OutlineColor: {r: 1, g: 0.8160377, b: 0.8160377, a: 1}
     - _SColor: {r: 0.254717, g: 0.254717, b: 0.254717, a: 1}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
   m_BuildTextureStacks: []

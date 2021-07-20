@@ -34,13 +34,36 @@ namespace PT.Bike
 
                 if (hasInput)
                 {
-                    _autoAccelerate = false;
-                }
+                    if (!_isSpeeding)
+                    {
+                        _isSpeeding = true;
+                        try
+                        {
+                            _bikeMaxSpeedTweener.Kill();
+                        }
+                        catch { }
 
-                if (hasInput || _autoAccelerate)
-                {
+                        _bikeMaxSpeedTweener = DOTween.To(() => _maxSpeed, (x) => { _maxSpeed = x; }, 30, 0.5f);
+                    }
+
                     Accelerate();
                     AlignVelocity();
+                }
+                else
+                {
+                    if (_isSpeeding)
+                    {
+                        _isSpeeding = false;
+                        try
+                        {
+                            _bikeMaxSpeedTweener.Kill();
+                        }
+                        catch { }
+
+                        _bikeMaxSpeedTweener = DOTween.To(() => _maxSpeed, (x) => { _maxSpeed = x; }, 20, 0.5f);
+                    }
+
+                    Accelerate();
                 }
             }
         }
@@ -110,8 +133,13 @@ namespace PT.Bike
             }
 
             _playerPolyT.parent = null;
+
+            _corpseRenderer.transform.parent = null;
+            _corpseRenderer.SetActive(true);
             _characterRagdoll.transform.parent = null;
+            _characterRagdoll.gameObject.SetActive(true);
             _characterRagdoll.Activate();
+            _dummyMan.SetActive(false);
 
             _rb.angularDrag = 0;
             _rb.angularVelocity = new Vector3(
@@ -123,7 +151,7 @@ namespace PT.Bike
             _ragdollBaseRB.velocity = _rb.velocity * 3;
 
             _cameraT.parent = null;
-            _cameraT.DOMove(point + Vector3.up * 3 + Vector3.forward * -3, 1f);
+            _cameraT.DOMove(point + transform.up * 3 + transform.forward * -3, 1f);
 
             Destroy(gameObject.GetComponent<PlayerBikeController>());
             Destroy(this);
@@ -143,7 +171,11 @@ namespace PT.Bike
         [SerializeField] private AnimationCurve _mdRotationCurve;
 
         [SerializeField] private Transform _playerPolyT, _cameraT;
+
         [SerializeField] private RagdollManager _characterRagdoll;
+        [SerializeField] private GameObject _dummyMan, _corpseRenderer;
+
+
         [SerializeField] private MonoBehaviour[] _ikSolvers;
         [SerializeField] private Collider[] _helperColliders;
 
@@ -152,6 +184,9 @@ namespace PT.Bike
 
         private float _zQAngularVelocity;
         private float _angularVelocity;
+
+        private Tweener _bikeMaxSpeedTweener;
+        private bool _isSpeeding = true;
 
         private void Start()
         {

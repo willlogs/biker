@@ -5,6 +5,7 @@ using PT.GunPlay;
 using RootMotion.FinalIK;
 using DG.Tweening;
 using UnityEngine.UI;
+using PT.Utils;
 
 namespace PT.Bike
 {
@@ -42,22 +43,29 @@ namespace PT.Bike
 
         public void ActivateShootingMode(Transform target = null, bool lookAtIt = false)
         {
+            /*_cameraCopyPosTween.Follow();
+            Camera.main.DOFieldOfView(100, 0.5f);*/
+
+            _gunIndex = Random.Range(0, _guns.Length);
+
             if(target != null)
             {
-                _gunAimTargetT.DOMove(target.position, 0.5f).SetUpdate(true);
+                _gunAimTargetT.DOMove(target.position, 0.5f).SetUpdate(true).OnComplete(() => {
+                    _aimUI.rectTransform.anchoredPosition = Vector2.zero;
+                    _gunController.ApplyMovement(Vector2.one * 0.1f, false);
+                });
             }
             else
             {
                 _gunAimTargetT.DOMove(transform.position + transform.forward * 10 + transform.up * 5, 0.5f).SetUpdate(true);
             }
 
-            /*_cameraIK.enabled = true;
-            _cameraIK.solver.IKPositionWeight = 0;
-            DOTween.To(() => _cameraIK.solver.IKPositionWeight, (x) => { _cameraIK.solver.IKPositionWeight = x; }, 1f, 0.5f).SetUpdate(true);*/
-
-            _gun.gameObject.SetActive(true);
+            _guns[_gunIndex].gameObject.SetActive(true);
+            _gunController.SetGun(_guns[_gunIndex]);
             _ik.solver.rightHandEffector.positionWeight = 0;
             _ik.solver.rightHandEffector.rotationWeight = 0;
+            _aimIK.solver.IKPositionWeight = 1;
+            _aimIK.enabled = true;
             _isInShootingMode = true;
 
             _aimUI.gameObject.SetActive(true);
@@ -69,12 +77,24 @@ namespace PT.Bike
         }
 
         public void DeactivateShootingMode()
-        {            
+        {
+            /*_cameraCopyPosTween.StopFollow();
+            Camera.main.fieldOfView = 88;
+            _cameraCopyPosTween.transform.position = _mainViewT.position;
+            _cameraCopyPosTween.transform.rotation = _mainViewT.rotation;*/
+
             DOTween.To(() => _cameraIK.solver.IKPositionWeight, (x) => { _cameraIK.solver.IKPositionWeight = x; }, 0f, 0.5f).SetUpdate(true).OnComplete(() => { _cameraIK.enabled = false; });
 
-            _gun.gameObject.SetActive(false);
+            foreach(Gun g in _guns)
+            {
+                g.gameObject.SetActive(false);
+            }
+
             _ik.solver.rightHandEffector.positionWeight = 1;
             _ik.solver.rightHandEffector.rotationWeight = 1;
+
+            _aimIK.solver.IKPositionWeight = 0;
+            _aimIK.enabled = false;
             _isInShootingMode = false;
 
             _aimUI.gameObject.SetActive(false);
@@ -89,10 +109,15 @@ namespace PT.Bike
         [SerializeField] private FullBodyBipedIK _ik;
         [SerializeField] private AimIK _aimIK, _cameraIK;
         [SerializeField] private Transform _gunAimTargetT;
-        [SerializeField] private Gun _gun;
+        [SerializeField] private Gun[] _guns;
         [SerializeField] private Image _aimUI;
 
         [SerializeField] private float _switchEach = 10f;
+
+        [SerializeField] private int _gunIndex = 0;
+
+        [SerializeField] private TweenCopyPosition _cameraCopyPosTween;
+        [SerializeField] private Transform _mainViewT;
 
         private TouchInputManager _inputManager;
         private BikeController _bikeController;

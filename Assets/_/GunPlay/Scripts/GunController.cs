@@ -23,6 +23,8 @@ namespace PT.GunPlay
                 );
 
                 Vector2 sp = _aimUI.anchoredPosition + Vector2.up * halfHeight + Vector2.right * halfWidth;
+                sp = _canvas.localScale * sp;
+
                 r = Camera.main.ScreenPointToRay(sp);
                 RaycastHit info;
 
@@ -42,10 +44,15 @@ namespace PT.GunPlay
             }
         }
 
+        public void SetGun(Gun g)
+        {
+            _gun = g;
+        }
+
         #endregion
 
         #region privates
-        [SerializeField] private RectTransform _aimUI;
+        [SerializeField] private RectTransform _aimUI, _canvas;
 
         [SerializeField] private bool _isInGunPlayMode = false;
 
@@ -58,8 +65,8 @@ namespace PT.GunPlay
 
         private void Start()
         {
-            halfWidth = Screen.width * 0.5f;
-            halfHeight = Screen.height * 0.5f;
+            halfWidth = _canvas.sizeDelta.x * 0.5f;
+            halfHeight = _canvas.sizeDelta.y * 0.5f;
         }
 
         private void Shoot()
@@ -69,7 +76,7 @@ namespace PT.GunPlay
 
         private void OnDrawGizmos()
         {
-            Gizmos.DrawLine(r.origin, r.origin + r.direction * 3);
+            Gizmos.DrawLine(r.origin, r.origin + r.direction * 50);
         }
 
         #endregion
