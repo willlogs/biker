@@ -11,14 +11,15 @@ namespace PT.CarChase
     public class ChaseSection : MonoBehaviour
     {
         [SerializeField] private ChaserCar[] _chasers;
-        [SerializeField] private Transform _chaserPlace;
+        [SerializeField] private Transform _chaserPlace, _targetT;
 
         [SerializeField] private float _slowMoFactor;
 
-        private bool _isIn = false;
+        private bool _isIn = false, _placing = false, _placed = false;
         private PlayerBikeController _player;
 
         private int _curIndex = 0;
+        private float _placeTime = 0;
 
         public void WinSituation()
         {
@@ -33,11 +34,11 @@ namespace PT.CarChase
                 if (pbc != null)
                 {
                     _isIn = true;
-
-                    pbc.ActivateShootingMode();
-                    pbc.transform.DOMoveX(transform.position.x, 0.5f).OnComplete(() =>
+                    
+                    pbc.transform.DOMoveX(transform.position.x, 0.2f).OnComplete(() =>
                     {
                         pbc.FollowTarget(transform);
+                        pbc.ActivateShootingMode(_targetT);
                     });
                     pbc.transform.DORotateQuaternion(Quaternion.identity, 0.3f);
 
@@ -55,7 +56,13 @@ namespace PT.CarChase
             {
                 _chasers[_curIndex].gameObject.SetActive(true);
                 _chasers[_curIndex].OnDestroy += ActivateSequence;
-                _chasers[_curIndex].transform.DOMove(new Vector3(_chasers[_curIndex].transform.position.x, _chasers[_curIndex].transform.position.y, _chaserPlace.position.z), 2f).SetUpdate(true);
+                _chasers[_curIndex].transform.DOLocalMove(new Vector3(_chasers[_curIndex].transform.localPosition.x, _chasers[_curIndex].transform.localPosition.y, -5f), 1.5f).SetUpdate(true).OnComplete(() => {
+                    //_chasers[_curIndex].transform.DOMoveX(0, 0.5f);
+                });
+
+                /*_placing = true;
+                _placed = false;
+                _placeTime = 0;*/
 
                 _curIndex++;
             }
@@ -66,6 +73,21 @@ namespace PT.CarChase
                 _player.DeactivateShootingMode();
                 _player.ContinueMoving();
             }
+        }
+
+        private void Update()
+        {
+            /*if(_placing && !_placed)
+            {
+                Vector3 targetPlace = new Vector3(_chaserPlace.transform.position.x, _chasers[_curIndex].transform.position.y, _chaserPlace.position.z);
+                _chasers[_curIndex].transform.position = Vector3.Lerp(_chasers[_curIndex].transform.position, targetPlace, _placeTime);
+                _placeTime += Time.unscaledDeltaTime / 2f;
+
+                if((_chasers[_curIndex].transform.position - targetPlace).magnitude < 0.5f)
+                {
+                    _placed = true;
+                }
+            }*/
         }
     }
 }

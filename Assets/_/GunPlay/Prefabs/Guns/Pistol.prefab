@@ -112,6 +112,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1639371816216305797, guid: d15165dd1884aba44b21f14ac1f6a796, type: 3}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1641731060240113589, guid: d15165dd1884aba44b21f14ac1f6a796, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5207946732169116338, guid: d15165dd1884aba44b21f14ac1f6a796, type: 3}
       propertyPath: _gunTargetT
       value: 
@@ -120,6 +128,10 @@ PrefabInstance:
       propertyPath: _bulletPrefab
       value: 
       objectReference: {fileID: 8500387981046136629, guid: a899104adecedac4aa260368ef9d1fd6, type: 3}
+    - target: {fileID: 5207946732169116338, guid: d15165dd1884aba44b21f14ac1f6a796, type: 3}
+      propertyPath: _coolDownTime
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5207946732169116338, guid: d15165dd1884aba44b21f14ac1f6a796, type: 3}
       propertyPath: OnShoot.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -134,11 +146,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5324360217559411134, guid: d15165dd1884aba44b21f14ac1f6a796, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.0539
+      value: 0.0578
       objectReference: {fileID: 0}
     - target: {fileID: 5324360217559411134, guid: d15165dd1884aba44b21f14ac1f6a796, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.2815
+      value: 0.237
       objectReference: {fileID: 0}
     - target: {fileID: 6018154271703253840, guid: d15165dd1884aba44b21f14ac1f6a796, type: 3}
       propertyPath: m_RootOrder

@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -41,6 +42,10 @@ namespace PT.CarChase
                 _animator.SetTrigger("Crash");
                 OnDestroy?.Invoke();
                 transform.parent = null;
+                float r = UnityEngine.Random.Range(-0.5f, 0.5f);
+                r = r > 0 ? 1 : -1;
+                transform.DOMoveX(10 * r, 0.5f);
+                transform.DOMoveY(10, 0.5f);
             }
         }
 

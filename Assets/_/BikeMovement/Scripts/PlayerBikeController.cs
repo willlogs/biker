@@ -48,9 +48,24 @@ namespace PT.Bike
             /*_cameraCopyPosTween.Follow();
             Camera.main.DOFieldOfView(100, 0.5f);*/
 
-            _gunIndex = Random.Range(0, _guns.Length);
+            // ik settings
+            _ik.solver.rightHandEffector.positionWeight = 0;
+            _ik.solver.rightHandEffector.rotationWeight = 0;
+            _gunPositionerIK.solver.IKPositionWeight = 1;
+            _aimIK.solver.IKPositionWeight = 1;
+            _aimIK.enabled = true;
+            _isInShootingMode = true;
 
-            if(target != null)
+            // activate random gun
+            _gunIndex = Random.Range(0, _guns.Length);
+            foreach(Gun g in _guns)
+            {
+                g.gameObject.SetActive(false);
+            }
+            _guns[_gunIndex].gameObject.SetActive(true);
+            _gunController.SetGun(_guns[_gunIndex]);
+
+            if (target != null)
             {
                 _gunAimTargetT.DOMove(target.position, 0.5f).SetUpdate(true).OnComplete(() => {
                     _aimUI.rectTransform.anchoredPosition = Vector2.zero;
@@ -62,22 +77,20 @@ namespace PT.Bike
                 _gunAimTargetT.DOMove(transform.position + transform.forward * 10 + transform.up * 5, 0.5f).SetUpdate(true);
             }
 
-            _guns[_gunIndex].gameObject.SetActive(true);
-            _gunController.SetGun(_guns[_gunIndex]);
-            _ik.solver.rightHandEffector.positionWeight = 0;
-            _ik.solver.rightHandEffector.rotationWeight = 0;
-            _gunPositionerIK.solver.IKPositionWeight = 1;
-            _aimIK.solver.IKPositionWeight = 1;
-            _aimIK.enabled = true;
-            _isInShootingMode = true;
-
+            _aimUI.rectTransform.anchoredPosition = Vector2.zero;
             _aimUI.gameObject.SetActive(true);
 
             resetCam = lookAtIt;
             if (lookAtIt)
             {
                 beforeRot = Camera.main.transform.localRotation;
-                Camera.main.transform.forward = (target.position - Camera.main.transform.position).normalized;
+                //Camera.main.transform.forward = (target.position - Camera.main.transform.position).normalized;
+                DOTween.To(
+                    () => Camera.main.transform.forward,
+                    (x) => { Camera.main.transform.forward = x; },
+                    (target.position - Camera.main.transform.position).normalized,
+                    1f
+                ).SetUpdate(true);
             }
         }
 
@@ -90,7 +103,8 @@ namespace PT.Bike
 
             if (resetCam)
             {
-                Camera.main.transform.localRotation = beforeRot;
+                //Camera.main.transform.localRotation = beforeRot;
+                Camera.main.transform.DOLocalRotateQuaternion(beforeRot, 0.5f).SetUpdate(true);
             }
 
             DOTween.To(() => _cameraIK.solver.IKPositionWeight, (x) => { _cameraIK.solver.IKPositionWeight = x; }, 0f, 0.5f).SetUpdate(true).OnComplete(() => { _cameraIK.enabled = false; });

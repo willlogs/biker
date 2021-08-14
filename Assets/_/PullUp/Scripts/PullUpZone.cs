@@ -5,6 +5,7 @@ using PT.Utils;
 using PT.AI;
 using PT.Bike;
 using DG.Tweening;
+using System;
 
 namespace PT.PullUp
 {
@@ -38,17 +39,30 @@ namespace PT.PullUp
             _count--;
             if(_count <= 0)
             {
-                // get back to running away
-                TimeManager.Instance.GoNormal(0.5f);
+                StartCoroutine(DoWithDelay(
+                    () => {
+                        // get back to running away
+                        TimeManager.Instance.GoNormal(0.5f);
 
-                _player.transform.DORotateQuaternion(
-                    _beforeRotation,
-                    0.2f
-                ).OnComplete(() => {
-                    _player.ContinueMoving();
-                    _player.DeactivateShootingMode();
-                });
+                        _player.transform.DORotateQuaternion(
+                            _beforeRotation,
+                            0.7f
+                        ).OnComplete(() =>
+                        {
+                            _player.ContinueMoving();
+                            _player.DeactivateShootingMode();
+                        });
+                    },
+                    1f)
+                );
             }
+        }
+
+        private IEnumerator DoWithDelay(Action job, float duration)
+        {
+            yield return new WaitForSecondsRealtime(duration);
+
+            job();
         }
 
         private void OnTriggerEnter(Collider other)

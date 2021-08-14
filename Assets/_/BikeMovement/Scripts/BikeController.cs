@@ -112,7 +112,7 @@ namespace PT.Bike
             _splineFollowerT.position = transform.position;
             _splineFollowerT.parent = transform;
 
-            _rb.velocity = transform.forward * 10f;
+            _rb.velocity = transform.forward * _maxSpeed;
             splineFollower.Position = 0;
             _positionTween.Kill();
         }

@@ -83,7 +83,9 @@ namespace PT.AI
             _currTweener.Kill();
             _aimIK.enabled = false;
 
-            _hipsRB.AddForce(-_lastCollisionNormal * 20000, ForceMode.Acceleration);
+            _hipsRB.transform.parent = null;
+            Vector3 dir = _lastCollisionNormal;
+            _hipsRB.velocity = dir.normalized * 50;
 
             OnDeath?.Invoke();
 
@@ -105,7 +107,14 @@ namespace PT.AI
 
         private void OnCollisionEnter(Collision collision)
         {
-            _lastCollisionNormal = collision.GetContact(0).normal;
+            try
+            {
+                _lastCollisionNormal = collision.rigidbody.velocity;
+            }
+            catch
+            {
+                _lastCollisionNormal = -collision.GetContact(0).normal;
+            }
 
             switch (collision.gameObject.layer)
             {

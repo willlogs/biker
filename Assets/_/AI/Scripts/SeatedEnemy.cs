@@ -3,11 +3,14 @@ using PT.Utils;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace PT.AI
 {
     public class SeatedEnemy : MonoBehaviour
     {
+        public UnityEvent OnCrash;
+
         public void Damage()
         {
             _health -= 40;
@@ -27,6 +30,7 @@ namespace PT.AI
 
         private void Die()
         {
+            OnCrash?.Invoke();
             _car.Crash();
         }
 

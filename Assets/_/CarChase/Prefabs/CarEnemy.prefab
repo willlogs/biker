@@ -619,7 +619,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &861343262856215660
 Transform:
   m_ObjectHideFlags: 0
@@ -1789,8 +1789,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 3.0961056, y: 4.27184, z: 0.5927925}
-  m_Center: {x: -4.456849, y: 1.63592, z: 0.9959196}
+  m_Size: {x: 3.0961056, y: 4.27184, z: 1.0249559}
+  m_Center: {x: -4.456848, y: 1.63592, z: 0.7798435}
 --- !u!114 &3357326310591758082
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1807,6 +1807,7 @@ MonoBehaviour:
   _trace:
   - {fileID: 90406020}
   _slowMoFactor: 0.3
+  _zoneEffect: {fileID: 3357326310709412718}
 --- !u!95 &5141805114966968508
 Animator:
   serializedVersion: 3
@@ -5636,6 +5637,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 79cd481c8e7a27a44ba9a78fbb16b903, type: 3}
+--- !u!1 &3357326310709412718 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 131378, guid: 79cd481c8e7a27a44ba9a78fbb16b903, type: 3}
+  m_PrefabInstance: {fileID: 3357326310709543516}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3357326310709752296 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 471988, guid: 79cd481c8e7a27a44ba9a78fbb16b903, type: 3}
@@ -5704,6 +5710,34 @@ PrefabInstance:
       propertyPath: _slider
       value: 
       objectReference: {fileID: 7120899440579286341}
+    - target: {fileID: 7715552829088780665, guid: 8c1f540597813344db90ed14204c6e4c, type: 3}
+      propertyPath: OnCrash.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7715552829088780665, guid: 8c1f540597813344db90ed14204c6e4c, type: 3}
+      propertyPath: OnCrash.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7715552829088780665, guid: 8c1f540597813344db90ed14204c6e4c, type: 3}
+      propertyPath: OnCrash.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 3357326310591758082}
+    - target: {fileID: 7715552829088780665, guid: 8c1f540597813344db90ed14204c6e4c, type: 3}
+      propertyPath: OnCrash.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7715552829088780665, guid: 8c1f540597813344db90ed14204c6e4c, type: 3}
+      propertyPath: OnCrash.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnCrash
+      objectReference: {fileID: 0}
+    - target: {fileID: 7715552829088780665, guid: 8c1f540597813344db90ed14204c6e4c, type: 3}
+      propertyPath: OnCrash.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: PT.CarChase.TargetCar, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7715552829088780665, guid: 8c1f540597813344db90ed14204c6e4c, type: 3}
+      propertyPath: OnCrash.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8c1f540597813344db90ed14204c6e4c, type: 3}
 --- !u!4 &7324350897991061829 stripped

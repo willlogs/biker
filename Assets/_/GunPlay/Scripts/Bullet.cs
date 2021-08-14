@@ -66,8 +66,8 @@ namespace PT.GunPlay
 
         private void DefaultBlowUp()
         {
-            GameObject go = Instantiate(_impactPrefab);
-            go.transform.position = transform.position;
+            /*GameObject go = Instantiate(_impactPrefab);
+            go.transform.position = transform.position;*/
             Destroy(gameObject);
         }
 
