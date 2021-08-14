@@ -56,7 +56,7 @@ namespace PT.CarChase
             {
                 _chasers[_curIndex].gameObject.SetActive(true);
                 _chasers[_curIndex].OnDestroy += ActivateSequence;
-                _chasers[_curIndex].transform.DOLocalMove(new Vector3(_chasers[_curIndex].transform.localPosition.x, _chasers[_curIndex].transform.localPosition.y, -5f), 1.5f).SetUpdate(true).OnComplete(() => {
+                _chasers[_curIndex].transform.DOLocalMove(new Vector3(_chasers[_curIndex].transform.localPosition.x, _chasers[_curIndex].transform.localPosition.y, -3f), 1.5f).SetUpdate(true).OnComplete(() => {
                     //_chasers[_curIndex].transform.DOMoveX(0, 0.5f);
                 });
 
