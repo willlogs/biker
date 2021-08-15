@@ -4,6 +4,7 @@ using UnityEngine;
 using PT.Utils;
 using PT.AI;
 using PT.Bike;
+using UnityEngine.SceneManagement;
 
 namespace PT.CarChase
 {
@@ -21,7 +22,10 @@ namespace PT.CarChase
 
         public void WinSituation()
         {
-
+            TimeManager.Instance.DoWithDelay(3f, () =>
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            });
         }
 
         public void OnCrash()

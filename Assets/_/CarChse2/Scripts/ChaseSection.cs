@@ -5,6 +5,7 @@ using PT.Utils;
 using PT.AI;
 using PT.Bike;
 using DG.Tweening;
+using UnityEngine.SceneManagement;
 
 namespace PT.CarChase
 {
@@ -21,9 +22,19 @@ namespace PT.CarChase
         private int _curIndex = 0;
         private float _placeTime = 0;
 
+        private static int _count = 0;
+
+        private void Start()
+        {
+            _count++;
+        }
+
         public void WinSituation()
         {
-
+            TimeManager.Instance.DoWithDelay(2f, () =>
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            });
         }
 
         private void OnTriggerEnter(Collider other)
@@ -68,10 +79,18 @@ namespace PT.CarChase
             }
             else
             {
-                // end section
-                TimeManager.Instance.GoNormal(0.5f);
-                _player.DeactivateShootingMode();
-                _player.ContinueMoving();
+                _count--;
+                if (_count > 0)
+                {
+                    // end section
+                    TimeManager.Instance.GoNormal(0.5f);
+                    _player.DeactivateShootingMode();
+                    _player.ContinueMoving();
+                }
+                else
+                {
+                    WinSituation();
+                }
             }
         }
 

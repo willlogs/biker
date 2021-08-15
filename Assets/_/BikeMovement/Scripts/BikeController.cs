@@ -1,9 +1,11 @@
 using DG.Tweening;
 using FluffyUnderware.Curvy.Controllers;
 using PT.AI;
+using PT.Utils;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace PT.Bike
 {
@@ -152,6 +154,11 @@ namespace PT.Bike
 
             _cameraT.parent = null;
             _cameraT.DOMove(point + transform.up * 3 + transform.forward * -3, 1f);
+
+            TimeManager.Instance.DoWithDelay(1.5f, () =>
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            });
 
             Destroy(gameObject.GetComponent<PlayerBikeController>());
             Destroy(this);

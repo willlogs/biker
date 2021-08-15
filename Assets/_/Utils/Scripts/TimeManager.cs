@@ -1,4 +1,5 @@
 using DG.Tweening;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -26,7 +27,18 @@ namespace PT.Utils
             _instance = this;
         }
 
+        private IEnumerator DelayJobExecute(float delay, Action job)
+        {
+            yield return new WaitForSecondsRealtime(delay);
+            job();
+        }
+
         private bool _isSlow = false;
+
+        public void DoWithDelay(float delay, Action job)
+        {
+            StartCoroutine(DelayJobExecute(delay, job));
+        }
 
         public void SlowDown(float duration, float factor = 0.3f)
         {
