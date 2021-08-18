@@ -38,7 +38,7 @@ namespace PT.AI
             }
         }
 
-        private void Start()
+        private void Awake()
         {
             if (active)
                 Activate();

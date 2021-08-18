@@ -30,8 +30,7 @@ namespace PT.CarChase
 
         public void OnCrash()
         {
-            _count--;
-            if(_count <= 0)
+            if(--_count <= 0)
             {
                 WinSituation();
             }

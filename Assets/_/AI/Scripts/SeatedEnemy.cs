@@ -28,6 +28,8 @@ namespace PT.AI
         [SerializeField] private SimpleCar _car;
         [SerializeField] private CustomSlider _slider;
 
+        private static int _count;
+
         private void Die()
         {
             OnCrash?.Invoke();
